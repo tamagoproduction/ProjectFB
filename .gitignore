@@ -1,0 +1,9 @@
+## Ignore File ##
+
+.git/
+.vs/
+Backup/
+Binaries/
+DerivedDataCache/
+Intermediate/
+*.sln
