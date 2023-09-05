@@ -32,11 +32,8 @@ public:
 	UStaticMeshComponent* FBMesh;
 
 	// * 카메라
-	UPROPERTY(VisibleAnywhere)
-	class UCameraComponent* FBCamera;
+	//UPROPERTY(VisibleAnywhere)
+	//class UCameraComponent* FBCamera;
 
-private:
-	// * 캐릭터 점프를 구현 함수
-	UFUNCTION()
-	void FBJump();
+	TWeakObjectPtr<class AMainCamera> MainCamera;
 };
