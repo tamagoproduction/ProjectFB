@@ -11,5 +11,6 @@ public class ProjectFBEditorTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V4;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_3;
 		ExtraModuleNames.Add("ProjectFB");
+		ExtraModuleNames.Add("Widgets");
 	}
 }

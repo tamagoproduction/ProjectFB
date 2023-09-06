@@ -42,6 +42,7 @@ AFBCharacter::AFBCharacter()
 		FBCamera->SetWorldLocation(FVector(-500.f, 0.f, 100.f));
 	}*/
 
+<<<<<<< HEAD
 	// 점프중에 또 점프가 가능하도록 카운트를 무한으로 설정
 	JumpMaxCount = INT_MAX;
 
@@ -49,6 +50,13 @@ AFBCharacter::AFBCharacter()
 	GetCapsuleComponent()->SetCapsuleSize(40.f, 40.f);
 	// 점프 기본값 420.f, 더 높게 점프하도록 수정가능
 	//GetCharacterMovement()->JumpZVelocity = 600.f;
+=======
+	// 카메라 위치를 멀리 떨어뜨리기
+	FBCamera->SetRelativeLocation(FVector(-300.f, 0.f, 0.f));
+
+	JumpMaxCount = 9999;
+
+>>>>>>> 99333437516b8b8ac250840b7d5b8e70fc20f8fb
 }
 
 // Called when the game starts or when spawned
