@@ -27,9 +27,6 @@ AFBCharacter::AFBCharacter()
 
 	// 카메라 위치를 멀리 떨어뜨리기
 	FBCamera->SetRelativeLocation(FVector(-300.f, 0.f, 0.f));
-
-	JumpMaxCount = 9999;
-
 }
 
 // Called when the game starts or when spawned
