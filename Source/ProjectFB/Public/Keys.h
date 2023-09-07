@@ -11,7 +11,11 @@ namespace Keys
 	{
 		const FName StartLevel = TEXT("GameLevel");
 		const FName MainLevel = TEXT("MainLevel");
-
+	}
+	namespace GameKeys
+	{
+		const FName Obstacle = TEXT("Obstacle");
+		const FName Pass = TEXT("Pass");
 	}
 
 	// ...

@@ -24,7 +24,13 @@ public:
 	virtual void Tick(float DeltaTime) override;
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
-		UStaticMeshComponent* ObstacleMesh;
+		class USceneComponent* Root; //루트 컴포넌트
+	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
+		class UStaticMeshComponent* AboveObstacleMesh; //위에 장애물
+	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
+		class UStaticMeshComponent* UnderObstacleMesh; //아래 장애물
+	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
+		class USphereComponent* PassCollision; //가운데 충돌체크
 	UPROPERTY(EditAnywhere, Category = "Obstacle")
 		float Speed = 1000.f;
 };

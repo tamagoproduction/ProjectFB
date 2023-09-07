@@ -9,11 +9,12 @@
 #include "../ProjectFBGameModeBase.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Keys.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	// 시작위치 변경
@@ -58,7 +59,7 @@ AMainCharacter::AMainCharacter()
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	// 카메라 액터 생성
 	MainCamera = GetWorld()->SpawnActor<AMainCamera>();
 	if (MainCamera.IsValid())
@@ -79,7 +80,7 @@ void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	
+
 }
 
 // Called to bind functionality to input
@@ -94,20 +95,29 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AMainCharacter::MyOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (IsValid(OtherActor) && OtherActor != this)
+	if (OtherActor != this)
 	{
-		AObstacle* Obstacle = Cast<AObstacle>(OtherActor);
-		if (IsValid(Obstacle))
-		{
-			// 게임모드 불러오기
-			AProjectFBGameModeBase* GameMode = Cast<AProjectFBGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
-			if (IsValid(GameMode))
-			{
-				// 게임 오버
-				GameMode->GameOver();
-			}
-		}
+		FString message = FString::Printf(TEXT("Comp Name : %s"), *OtherComp->GetName());
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, message);
 	}
 
+	//충돌상 상대가 유효하고 장애물 태그를 가지고 있다면
+	if (IsValid(OtherActor) && OtherComp->ComponentHasTag(Keys::GameKeys::Obstacle))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Blue, TEXT("Obstacle Collision Overlap"));
+
+		AProjectFBGameModeBase* GameMode = Cast<AProjectFBGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+		if (IsValid(GameMode))
+		{
+			// 게임 오버
+			GameMode->GameOver();
+			//TODO : 죽은경우 서버로 점수 저장
+		}
+	}
+	if (IsValid(OtherActor) && OtherComp->ComponentHasTag(Keys::GameKeys::Pass))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Pass Collision Overlap"));
+		//TODO : 점수 증가 로직 추가
+	}
 }
 

@@ -18,7 +18,7 @@ public:
 	AProjectFBGameModeBase();
 
 	void GameOver();
-
+	virtual void BeginPlay() override;
 public:
 	UPROPERTY()
 	TSubclassOf<UUserWidget> GameoverWidgetClass;

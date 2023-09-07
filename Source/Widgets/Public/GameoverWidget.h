@@ -4,26 +4,25 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "GameoverWidget.generated.h"
+#include "GameOverWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class WIDGETS_API UGameoverWidget : public UUserWidget
+class WIDGETS_API UGameOverWidget : public UUserWidget
 {
 	GENERATED_BODY()
-
 public:
 	virtual void NativeOnInitialized() override; //위젯 초기화시 호출되는 함수
 public:
 	UPROPERTY(meta = (BindWidget))
-	class UButton* RestartButton; // 재시작 버튼
+		class UButton* RestartButton; // 재시작 버튼
 	UPROPERTY(meta = (BindWidget))
-	class UButton* MainButton; // 메인화면 돌아가기 버튼
+		class UButton* MainButton; // 메인화면 돌아가기 버튼
 public:
 	UFUNCTION()
-	void OnRestart();
+		void OnRestart();
 	UFUNCTION()
-	void OnMain();
+		void OnMain();
 };
