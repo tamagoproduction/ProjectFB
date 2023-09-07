@@ -26,5 +26,5 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
 		UStaticMeshComponent* ObstacleMesh;
 	UPROPERTY(EditAnywhere, Category = "Obstacle")
-		float Speed = 0.1f;
+		float Speed = 1000.f;
 };

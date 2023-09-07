@@ -16,6 +16,8 @@ AObstacle::AObstacle()
 	if (MeshAsset.Succeeded())
 	{
 		ObstacleMesh->SetStaticMesh(MeshAsset.Object);
+		// Overlap 이벤트 활성화
+		ObstacleMesh->SetGenerateOverlapEvents(true);
 	}
 }
 
@@ -30,7 +32,9 @@ void AObstacle::BeginPlay()
 void AObstacle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	FVector Movement = FVector::ForwardVector * Speed * DeltaTime;
+	//FVector Movement = FVector::ForwardVector * Speed * DeltaTime;
+	FVector Movement = FVector(0.f, -1.f, 0.f) * Speed * DeltaTime;
+
 	SetActorLocation(GetActorLocation() + Movement);
 }
 

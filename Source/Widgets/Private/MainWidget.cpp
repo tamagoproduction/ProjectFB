@@ -6,6 +6,7 @@
 #include "Components/TextBlock.h"
 #include "Kismet/GameplayStatics.h"
 
+#include "Keys.h"
 
 void UMainWidget::NativeOnInitialized()
 {
@@ -16,5 +17,5 @@ void UMainWidget::NativeOnInitialized()
 
 void UMainWidget::OnStartGame()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), TEXT("GameLevel"));
+	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::MainLevel);
 }

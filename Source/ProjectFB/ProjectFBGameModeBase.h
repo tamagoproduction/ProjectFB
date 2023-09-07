@@ -16,4 +16,12 @@ class PROJECTFB_API AProjectFBGameModeBase : public AGameModeBase
 	
 public:
 	AProjectFBGameModeBase();
+
+	void GameOver();
+
+public:
+	UPROPERTY()
+	TSubclassOf<UUserWidget> GameoverWidgetClass;
+	UPROPERTY()
+	class UUserWidget* GameoverWidget;
 };

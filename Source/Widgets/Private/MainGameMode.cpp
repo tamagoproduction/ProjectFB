@@ -14,7 +14,7 @@ AMainGameMode::AMainGameMode()
 	{
 		MainWidgetClass = WidgetAsset.Class;
 	}
-	DefaultPawnClass = AMainCharacter::StaticClass();
+	//DefaultPawnClass = AMainCharacter::StaticClass();
 }
 
 void AMainGameMode::BeginPlay()

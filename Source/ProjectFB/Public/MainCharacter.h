@@ -26,4 +26,17 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// * Mesh
+	// 임시로 사용할 cube형태의 static mesh 이용
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* FBMesh;
+
+	// * 카메라
+	TWeakObjectPtr<class AMainCamera> MainCamera;
+
+private:
+	UFUNCTION()
+	void MyOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor,
+		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+		bool bFromSweep, const FHitResult& SweepResult);
 };
