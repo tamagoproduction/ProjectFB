@@ -15,3 +15,5 @@ Keys.h 추가 : 키워드들을 모아 한곳에서 namespace로 관리, Keys:: 
 MainCharacter : Obstacle과 Overlap 시 GameMode의 Gameover 로직 실행하도록 함수 델리게이트 연결  
 Gameover : 단순히 GameoverWidget을 표시, 플레이어 입력 제한 필요  
 GameoverWidget : Restart버튼 로직 구현 필요, Main버튼 클릭 시 GameLevel(처음화면)으로 돌아감  
+
+* 복구 이후 GameoverWidget이 오류가 있어 프로젝트 재시작 시 열리지 않음, 클래스 파일은 그대로지만 블루프린트 오류
