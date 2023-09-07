@@ -1,8 +1,8 @@
-Log started at 09/07/2023 15:16:48 (2023-09-07T06:16:48Z)
+Log started at 09/07/2023 15:56:59 (2023-09-07T06:56:59Z)
 No config file at C:\Users\DHLee\Documents\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
 Configuration will be read from:
   C:\Users\DHLee\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
-Log file: C:\Users\DHLee\Documents\Unreal Projects\ProjectFB\Saved\Logs\UnrealVersionSelector-2023.09.07-15.16.48.log
+Log file: C:\Users\DHLee\Documents\Unreal Projects\ProjectFB\Saved\Logs\UnrealVersionSelector-2023.09.07-15.56.59.log
 
 Setting temp directory to 'C:\Users\DHLee\AppData\Local\Temp\UnrealBuildTool\319625c3'
     Registering build platform: UnrealBuildTool.AndroidPlatformFactory
@@ -51,7 +51,7 @@ Skipping C:\Program Files\Epic Games\UE_5.3\Engine\Intermediate\Build\BuildRules
 Skipping C:\Program Files\Epic Games\UE_5.3\Engine\Intermediate\Build\BuildRules\UE5ProgramRules.dll: File is installed
 Generating target Editor for C:\Users\DHLee\Documents\Unreal Projects\ProjectFB\Intermediate\ProjectFiles\UE5.vcxproj
 Generating target Game for C:\Users\DHLee\Documents\Unreal Projects\ProjectFB\Intermediate\ProjectFiles\UE5.vcxproj
-Compiling C:\Users\DHLee\Documents\Unreal Projects\ProjectFB\Intermediate\Build\BuildRules\ProjectFBModuleRules.dll: C:\Users\DHLee\Documents\Unreal Projects\ProjectFB\Source\ProjectFB\ProjectFB.Build.cs is newer
+Compiling C:\Users\DHLee\Documents\Unreal Projects\ProjectFB\Intermediate\Build\BuildRules\ProjectFBModuleRules.dll: Assembly does not exist
 Adding event matcher: CompileEventMatcher
 Adding event matcher: LinkEventMatcher
 Adding event matcher: MicrosoftEventMatcher
@@ -1764,7 +1764,6 @@ Found target: UnrealEditor
 Found target: ProjectFBEditor
 Building UnrealEditor - UnrealEditor - Win64 - Development
 Building UnrealEditor - ProjectFBEditor - Win64 - Development
-@progress 'Binding IntelliSense data...' 25%
 Excluding module AndroidLocalNotification: Excluded folder name
 Excluding module AndroidRuntimeSettings: Excluded folder name
 Excluding module AudioMixerAndroid: Excluded folder name
@@ -1777,6 +1776,7 @@ Excluding module IOSAudio: Excluded folder name
 Excluding module IOSLocalNotification: Excluded folder name
 Excluding module IOSPlatformFeatures: Excluded folder name
 Excluding module IOSRuntimeSettings: Excluded folder name
+@progress 'Binding IntelliSense data...' 25%
 Excluding module AudioMixerSDL: Excluded folder name
 Excluding module UnixCommonStartup: Excluded folder name
 Excluding module AndroidDeviceDetection: Excluded folder name
@@ -8297,11 +8297,13 @@ Creating common properties file...
 @progress 'Creating common properties file...' 0%
 Writing project files...
 @progress 'Writing project files...' 0%
+Saved UE5.vcxproj
 Saved ProjectFB.vcxproj
 Saved ProjectFB.vcxproj.filters
+Saved ProjectFB.vcxproj.user
 @progress 'Writing project files...' 33%
-Skipped saving UE5.vcxproj because contents haven't changed.
-Skipped saving UE5.vcxproj.filters because contents haven't changed.
+Saved UE5.vcxproj.filters
+Saved UE5.vcxproj.user
 @progress 'Writing project files...' 67%
 Saved ProjectFB.sln
 Skipped saving .vsconfig because contents haven't changed.
@@ -8309,9 +8311,9 @@ Skipped saving .vsconfig because contents haven't changed.
 Project generation complete (2 generated, 46 imported)
 
 Generating QueryTargets data for editor...
-WriteFileIfChanged() wrote 0 changed files of 1509 requested writes.
+WriteFileIfChanged() wrote 6 changed files of 1509 requested writes.
 Timeline:
 
 [ 0.000]
-[ 0.000](+4.740) <unknown>
-[ 4.740]
+[ 0.000](+4.305) <unknown>
+[ 4.305]
