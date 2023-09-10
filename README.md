@@ -17,3 +17,29 @@ Gameover : 단순히 GameoverWidget을 표시, 플레이어 입력 제한 필요
 GameoverWidget : Restart버튼 로직 구현 필요, Main버튼 클릭 시 GameLevel(처음화면)으로 돌아감  
 
 * 복구 이후 GameoverWidget이 오류가 있어 프로젝트 재시작 시 열리지 않음, 클래스 파일은 그대로지만 블루프린트 오류
+
+[230911/phw]
+@레벨마다 사용되는 클래스
+- MainMap
+  * MainGameMode : MainMap에서 MainCharacter 생성
+  * MainCharacter : 메인화면에서 보여질 캐릭터
+  * MainWidget : 메인화면에서 보여질 위젯
+- GameMap
+  * GameGameMode : GameMap에서 PlayerCharacter생성, GameOverWidget생성 (클래스명 변경 논의 필요)
+  * PlayerCharacter : GameMap에서 조종될 캐릭터
+  * Obstacle : 장애물
+  * GameOverWidget : 게임 종료시 보여질 위젯
+
+@모듈별 클래스
+- ProjectFB : 프레젝트 전체에서 사용될 클래스
+  * TempActor : ProjectFB 모듈을 보여주기 위한 클래스(추 후 삭제 예정)
+  * Keys : 프레임워크용
+- Characters : 액터, 폰, 캐릭터를 넣어둘 정리용 모듈
+  * MainCharacter : MainMap에서 사용
+  * PlayerCharacter : GameMap에서 사용
+- GameModes : 게임모드 정리용 모듈
+  * MainGameMode : MainMap에서 사용
+  * GameGameMode : GameMap에서 사용
+- Widgets : 위젯 정리용 모듈
+  * MainWidget : Main화면에서 사용 위젯
+  * GameOverWidget : GameMap에서 사용 위젯
