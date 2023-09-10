@@ -10,7 +10,9 @@
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine",
-				"UMG"
+				"Widgets",
+				"Characters",
+				"GameModes"
 			]
 		},
 		{
@@ -18,8 +20,23 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"UMG",
-				"Engine"
+				"UMG", "ProjectFB", "Characters", "GameModes"
+			]
+		},
+		{
+			"Name": "Characters",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine", "ProjectFB", "GameModes", "Widgets"
+			]
+		},
+		{
+			"Name": "GameModes",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine", "ProjectFB", "Widgets", "Characters"
 			]
 		}
 	],

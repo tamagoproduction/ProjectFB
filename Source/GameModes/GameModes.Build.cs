@@ -2,13 +2,13 @@
 
 using UnrealBuildTool;
 
-public class ProjectFB : ModuleRules
+public class GameModes : ModuleRules
 {
-	public ProjectFB(ReadOnlyTargetRules Target) : base(Target)
+	public GameModes(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Widgets", "Characters", "GameModes"});
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "ProjectFB", "Widgets", "Characters", "UMG"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

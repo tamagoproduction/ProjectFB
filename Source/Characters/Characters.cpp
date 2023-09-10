@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "Widgets.h"
+#include "Characters.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_MODULE( FDefaultGameModuleImpl, Widgets);
+IMPLEMENT_MODULE( FDefaultGameModuleImpl, Characters);

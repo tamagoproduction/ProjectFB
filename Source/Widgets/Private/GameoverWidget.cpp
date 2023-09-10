@@ -12,15 +12,14 @@ void UGameOverWidget::NativeOnInitialized()
 {
 	RestartButton->OnClicked.AddDynamic(this, &UGameOverWidget::OnRestart);
 	MainButton->OnClicked.AddDynamic(this, &UGameOverWidget::OnMain);
-
 }
 
 void UGameOverWidget::OnRestart()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::MainLevel);
+	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::GameMap);
 }
 
 void UGameOverWidget::OnMain()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::StartLevel);
+	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::MainMap);
 }
