@@ -1,8 +1,8 @@
-Log started at 09/11/2023 04:22:52 (2023-09-10T19:22:52Z)
+Log started at 09/12/2023 04:07:44 (2023-09-11T19:07:44Z)
 No config file at C:\Users\admin\Documents\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
 Configuration will be read from:
   C:\Users\admin\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
-Log file: D:\Github\ProjectFB\Saved\Logs\UnrealVersionSelector-2023.09.11-04.22.52.log
+Log file: D:\Github\ProjectFB\Saved\Logs\UnrealVersionSelector-2023.09.12-04.07.43.log
 
 Setting temp directory to 'C:\Users\admin\AppData\Local\Temp\UnrealBuildTool\ed98a64d'
     Registering build platform: UnrealBuildTool.AndroidPlatformFactory
@@ -1765,8 +1765,8 @@ AddProjectsForAllModules D:\Github\ProjectFB\Source\ProjectFB\ProjectFB.Build.cs
 AddProjectsForAllModules D:\Github\ProjectFB\Source\Widgets\Widgets.Build.cs
 Binding IntelliSense data...
 @progress 'Binding IntelliSense data...' 0%
-Found target: ProjectFBEditor
 Found target: UnrealEditor
+Found target: ProjectFBEditor
 Building UnrealEditor - UnrealEditor - Win64 - Development
 Building UnrealEditor - ProjectFBEditor - Win64 - Development
 Excluding module AndroidLocalNotification: Excluded folder name
@@ -1776,6 +1776,7 @@ Excluding module AudioMixerAudioUnit: Excluded folder name
 Excluding module AudioMixerCoreAudio: Excluded folder name
 Excluding module MetalRHI: Excluded folder name
 Excluding module AudioCaptureAndroid: Excluded folder name
+@progress 'Binding IntelliSense data...' 25%
 Excluding module AudioCaptureAudioUnit: Excluded folder name
 Excluding module IOSAudio: Excluded folder name
 Excluding module IOSLocalNotification: Excluded folder name
@@ -2047,7 +2048,6 @@ Excluding module CommonConversationEditor: Not under compatible directories
 Excluding module CommonConversationGraph: Not under compatible directories
 Excluding module CommonConversationRuntime: Not under compatible directories
 Excluding module ControlFlows: Not under compatible directories
-@progress 'Binding IntelliSense data...' 25%
 Excluding module DatasmithCloTranslator: Not under compatible directories
 Excluding module DefaultInstallBundleManager: Not under compatible directories
 Excluding module DatasmithRuntime: Not under compatible directories
@@ -8316,5 +8316,5 @@ WriteFileIfChanged() wrote 8 changed files of 1511 requested writes.
 Timeline:
 
 [ 0.000]
-[ 0.000](+7.526) <unknown>
-[ 7.526]
+[ 0.000](+6.501) <unknown>
+[ 6.501]

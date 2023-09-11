@@ -25,14 +25,19 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-public:
+private:
 	// * Mesh
 // 임시로 사용할 cube형태의 static mesh 이용
-	UPROPERTY(VisibleAnywhere)
-		UStaticMeshComponent* MyMesh;
+	UPROPERTY(VisibleAnywhere, Category = "Mesh")
+		TObjectPtr<UStaticMeshComponent> MyMesh;
 
 	// * 카메라
 	TWeakObjectPtr<class AMainCamera> MainCamera;
+private: //향상된 입력 시스템
+	UPROPERTY(VisibleAnywhere, Category = Input)
+		TObjectPtr<class UInputMappingContext> DefaultMappingContext;
+	UPROPERTY(VisibleAnywhere, Category = Input)
+		TObjectPtr<class UInputAction> JumpAction;
 
 private:
 	UFUNCTION()

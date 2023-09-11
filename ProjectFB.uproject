@@ -28,7 +28,7 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"Engine", "ProjectFB", "GameModes", "Widgets"
+				"Engine", "ProjectFB", "GameModes", "Widgets", "EnhancedInput"
 			]
 		},
 		{

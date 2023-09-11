@@ -17,9 +17,9 @@ public:
 	virtual void NativeOnInitialized() override; //위젯 초기화시 호출되는 함수
 public:
 	UPROPERTY(meta = (BindWidget))
-		class UButton* StartButton; //게임시작 버튼
+		TObjectPtr<class UButton> StartButton; //게임시작 버튼
 	UPROPERTY(meta = (BindWidget))
-		class UButton* OptionButton; //환경설정 버튼
+		TObjectPtr<class UButton> OptionButton; //환경설정 버튼
 public:
 	UFUNCTION()
 		void OnStartGame();

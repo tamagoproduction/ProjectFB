@@ -10,8 +10,8 @@ namespace Keys
 {
 	namespace LevelKeys
 	{
-		const FName MainMap = TEXT("MainMap");
-		const FName GameMap = TEXT("GameMap");
+		const FName MainMap = TEXT("Main");
+		const FName GameMap = TEXT("Game");
 	}
 	namespace GameKeys
 	{

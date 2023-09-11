@@ -9,6 +9,11 @@
 #include "GameGameMode.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
+
+#include "InputAction.h"
+#include "InputMappingContext.h"
+#include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
 #include "Keys.h"
 
 // Sets default values
@@ -36,6 +41,20 @@ APlayerCharacter::APlayerCharacter()
 		}
 	}
 
+	// * 입력시스템
+	//#include "InputMappingContext.h"를 해야 FObjectFinder로 로드가 가능
+	static ConstructorHelpers::FObjectFinder<UInputMappingContext> IMCAsset(TEXT("/Script/EnhancedInput.InputMappingContext'/Game/InputSystem/IMC_Defaut.IMC_Defaut'"));
+	if (IMCAsset.Succeeded())
+	{
+		DefaultMappingContext = IMCAsset.Object;
+	}
+	//#include "InputAction.h"를 해야 FObjectFinder로 로드가 가능
+	static ConstructorHelpers::FObjectFinder<UInputAction> JumpActionAsset(TEXT("/Script/EnhancedInput.InputAction'/Game/InputSystem/IA_Jump.IA_Jump'"));
+	{
+		JumpAction = JumpActionAsset.Object;
+	}
+
+
 	// 캡슐 시각화 옵션
 	GetCapsuleComponent()->SetHiddenInGame(false);
 
@@ -58,7 +77,7 @@ APlayerCharacter::APlayerCharacter()
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	// 카메라 액터 생성
+	// * 카메라 액터 생성
 	MainCamera = GetWorld()->SpawnActor<AMainCamera>();
 	if (MainCamera.IsValid())
 	{
@@ -68,8 +87,18 @@ void APlayerCharacter::BeginPlay()
 		{
 			// 시야를 해당 카메라로 설정
 			PlayerController->SetViewTargetWithBlend(MainCamera.Get());
+			
+			// * 향상된 입력으로 컨텍스트 변경
+			UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem< UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
+			if (SubSystem != nullptr)
+			{
+				SubSystem->AddMappingContext(DefaultMappingContext, 0);
+			}
+
 		}
 	}
+	
+	
 }
 
 // Called every frame
@@ -83,9 +112,16 @@ void APlayerCharacter::Tick(float DeltaTime)
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	UEnhancedInputComponent* Input = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+	if (Input != nullptr)
+	{
+		//키를 눌렀을때
+		Input->BindAction(JumpAction, ETriggerEvent::Triggered, this, &Super::Jump);
+		//키를 땟을때
+		Input->BindAction(JumpAction, ETriggerEvent::Completed, this, &Super::StopJumping);
+	}
 	// * 점프 기능 외에 다른 조작법이 존재하지 않는다
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &Super::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &Super::StopJumping);
+
 }
 
 void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
