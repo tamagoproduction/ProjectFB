@@ -7,5 +7,5 @@ AMainCamera::AMainCamera()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	RootComponent->SetWorldLocation(FVector(-1000.f, 0.f, 300.f));
+	RootComponent->SetWorldLocation(FVector(-1000.f, 0.f, 0.f));
 }

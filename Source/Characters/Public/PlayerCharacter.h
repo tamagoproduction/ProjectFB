@@ -12,27 +12,28 @@ class CHARACTERS_API APlayerCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	APlayerCharacter();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 private:
 	// * Mesh
 // 임시로 사용할 cube형태의 static mesh 이용
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
-		TObjectPtr<UStaticMeshComponent> MyMesh;
+		TObjectPtr<class UStaticMeshComponent> MyMesh;
 
 	// * 카메라
 	TWeakObjectPtr<class AMainCamera> MainCamera;
+	// * 게임인스턴스
+	TWeakObjectPtr<class UProjectGameInstance> GameInstance;
+
+	UPROPERTY(VisibleAnywhere, Category = "Score")
+		int32 Score;
 private: //향상된 입력 시스템
 	UPROPERTY(VisibleAnywhere, Category = Input)
 		TObjectPtr<class UInputMappingContext> DefaultMappingContext;
@@ -44,4 +45,10 @@ private:
 		void OnMyOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor,
 			class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 			bool bFromSweep, const FHitResult& SweepResult);
+
+public:
+	FORCEINLINE int32 GetScore()
+	{
+		return Score;
+	}
 };

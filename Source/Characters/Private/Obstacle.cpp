@@ -48,13 +48,15 @@ AObstacle::AObstacle()
 	PassCollision->SetRelativeLocation(FVector::Zero());
 	PassCollision->InitSphereRadius(60.f);
 	PassCollision->ComponentTags.Add(Keys::GameKeys::Pass);
+
 }
 
 // Called when the game starts or when spawned
 void AObstacle::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	FTimerHandle Timer;
+	GetWorldTimerManager().SetTimer(Timer, this, &AObstacle::Deactivate, 10.f, false);
 }
 
 // Called every frame
@@ -64,5 +66,24 @@ void AObstacle::Tick(float DeltaTime)
 	FVector Movement = FVector::LeftVector * Speed * DeltaTime;
 
 	SetActorLocation(GetActorLocation() + Movement);
+}
+
+void AObstacle::SetActive(bool isActive)
+{
+	SetActorTickEnabled(isActive);
+	SetActorEnableCollision(isActive);
+	SetActorHiddenInGame(!isActive);
+	bActive = isActive;
+	if (isActive)
+	{
+		FTimerHandle Timer;
+		//5초 후 비활성화
+		GetWorldTimerManager().SetTimer(Timer, this, &AObstacle::Deactivate, 10.f, false);
+	}
+}
+
+void AObstacle::Deactivate()
+{
+	SetActive(false); //비활성화
 }
 

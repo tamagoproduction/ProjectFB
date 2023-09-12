@@ -9,7 +9,7 @@
 #include "GameGameMode.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
-
+#include "ProjectGameInstance.h"
 #include "InputAction.h"
 #include "InputMappingContext.h"
 #include "EnhancedInputComponent.h"
@@ -71,6 +71,8 @@ APlayerCharacter::APlayerCharacter()
 	JumpMaxCount = INT_MAX;
 	// 점프 속도 조절, 기본값 420
 	GetCharacterMovement()->JumpZVelocity = 500.f;
+
+	Score = 0;
 }
 
 // Called when the game starts or when spawned
@@ -98,7 +100,7 @@ void APlayerCharacter::BeginPlay()
 		}
 	}
 	
-	
+	GameInstance = Cast<UProjectGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 }
 
 // Called every frame
@@ -116,7 +118,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	if (Input != nullptr)
 	{
 		//키를 눌렀을때
-		Input->BindAction(JumpAction, ETriggerEvent::Triggered, this, &Super::Jump);
+		Input->BindAction(JumpAction, ETriggerEvent::Started, this, &Super::Jump);
 		//키를 땟을때
 		Input->BindAction(JumpAction, ETriggerEvent::Completed, this, &Super::StopJumping);
 	}
@@ -140,15 +142,22 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 		AGameGameMode* GameGameMode = Cast<AGameGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 		if (IsValid(GameGameMode))
 		{
+			if (GameInstance->GetBestScore() > Score)
+			{
+				GameInstance->SetBestScore(Score); //점수를 게임인스턴스에 저장
+			}
+
 			// 게임 오버
 			GameGameMode->OnGameOver();
 			//TODO : 죽은경우 서버로 점수 저장
+			UGameplayStatics::SetGamePaused(GetWorld(), true);
 		}
 	}
 	if (IsValid(OtherActor) && OtherComp->ComponentHasTag(Keys::GameKeys::Pass))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Pass Collision Overlap"));
-		//TODO : 점수 증가 로직 추가
+		Score++;
+		FString message = FString::Printf(TEXT("Score : %d"), Score);
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, message);
 	}
 }
 

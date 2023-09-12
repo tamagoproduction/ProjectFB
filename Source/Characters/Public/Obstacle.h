@@ -33,4 +33,14 @@ private:
 		TObjectPtr<class USphereComponent> PassCollision; //가운데 충돌체크
 	UPROPERTY(EditAnywhere, Category = "Obstacle")
 		float Speed = 1000.f;
+
+	bool bActive = false;
+public:
+	void SetActive(bool isActive); //활성화 비활성화
+	void Deactivate(); //비활성화
+public:
+	FORCEINLINE bool GetIsActive()
+	{
+		return bActive;
+	}
 };
