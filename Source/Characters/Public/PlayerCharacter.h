@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "PlayerCharacter.generated.h"
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnUpdateScoreDelegate, int32);
+
 UCLASS()
 class CHARACTERS_API APlayerCharacter : public ACharacter
 {
@@ -45,7 +47,8 @@ private:
 		void OnMyOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor,
 			class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 			bool bFromSweep, const FHitResult& SweepResult);
-
+public:
+	FOnUpdateScoreDelegate OnUpdateScoreDelegate;
 public:
 	FORCEINLINE int32 GetScore()
 	{

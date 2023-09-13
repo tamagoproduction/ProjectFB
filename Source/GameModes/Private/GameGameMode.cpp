@@ -11,21 +11,32 @@ AGameGameMode::AGameGameMode()
 {
 	DefaultPawnClass = APlayerCharacter::StaticClass();
 
-	static ConstructorHelpers::FClassFinder<UUserWidget> WidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_GameOverWidget.BP_GameOverWidget_C'"));
-	if (WidgetAsset.Succeeded())
+	static ConstructorHelpers::FClassFinder<UUserWidget> GameOverWidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_GameOverWidget.BP_GameOverWidget_C'"));
+	if (GameOverWidgetAsset.Succeeded())
 	{
-		GameoverWidgetClass = WidgetAsset.Class;
+		GameOverWidgetClass = GameOverWidgetAsset.Class;
+	}
+	static ConstructorHelpers::FClassFinder<UUserWidget> GameWidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_GameWidget.BP_GameWidget_C'"));
+	if (GameWidgetAsset.Succeeded())
+	{
+		GameWidgetClass = GameWidgetAsset.Class;
 	}
 }
 
 void AGameGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-	if (GameoverWidgetClass != nullptr)
+	if (GameWidgetClass != nullptr)
 	{
-		GameoverWidget = CreateWidget<UUserWidget>(GetWorld(), GameoverWidgetClass);
-		GameoverWidget->AddToViewport();
-		GameoverWidget->SetVisibility(ESlateVisibility::Hidden); //∞‘¿”ø¿πˆ ¿ß¡¨¿ª º˚∞‹¡‹
+		GameWidget = CreateWidget<UUserWidget>(GetWorld(), GameWidgetClass);
+		GameWidget->AddToViewport();
+	}
+
+	if (GameOverWidgetClass != nullptr)
+	{
+		GameOverWidget = CreateWidget<UUserWidget>(GetWorld(), GameOverWidgetClass);
+		GameOverWidget->AddToViewport();
+		GameOverWidget->SetVisibility(ESlateVisibility::Hidden); //∞‘¿”ø¿πˆ ¿ß¡¨¿ª º˚∞‹¡‹
 	}
 }
 
@@ -33,5 +44,5 @@ void AGameGameMode::OnGameOver()
 {
 	//∏∂øÏΩ∫∏¶ ∫∏ø©¡‹
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
-	GameoverWidget->SetVisibility(ESlateVisibility::Visible); //∞‘¿”ø¿πˆ ¿ß¡¨¿ª ∫∏ø©¡‹
+	GameOverWidget->SetVisibility(ESlateVisibility::Visible); //∞‘¿”ø¿πˆ ¿ß¡¨¿ª ∫∏ø©¡‹
 }

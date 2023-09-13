@@ -19,9 +19,13 @@ public:
 	virtual void BeginPlay() override;
 public:
 	UPROPERTY()
-		TSubclassOf<UUserWidget> GameoverWidgetClass;
+		TSubclassOf<UUserWidget> GameOverWidgetClass;
 	UPROPERTY()
-		class UUserWidget* GameoverWidget;
+		class UUserWidget* GameOverWidget;
+	UPROPERTY()
+		TSubclassOf<UUserWidget> GameWidgetClass;
+	UPROPERTY()
+		class UUserWidget* GameWidget;
 public:
 	void OnGameOver();
 };

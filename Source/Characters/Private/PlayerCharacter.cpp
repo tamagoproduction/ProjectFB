@@ -156,6 +156,10 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 	if (IsValid(OtherActor) && OtherComp->ComponentHasTag(Keys::GameKeys::Pass))
 	{
 		Score++;
+		if (OnUpdateScoreDelegate.IsBound())
+		{
+			OnUpdateScoreDelegate.Broadcast(Score);
+		}
 		FString message = FString::Printf(TEXT("Score : %d"), Score);
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, message);
 	}
