@@ -27,5 +27,6 @@ public:
 	UPROPERTY()
 		class UUserWidget* GameWidget;
 public:
-	void OnGameOver();
+	UFUNCTION()
+		void OnGameOver();
 };

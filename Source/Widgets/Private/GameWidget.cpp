@@ -14,7 +14,6 @@ void UGameWidget::NativeOnInitialized()
 	if (IsValid(Player))
 	{
 		Player->OnUpdateScoreDelegate.AddUObject(this, &UGameWidget::OnUpdateScore);
-		
 	}
 	ScoreText->SetText(FText::FromString(TEXT("0")));
 }

@@ -18,6 +18,9 @@ private:
 public:
 	UPROPERTY(meta = (BindWidget))
 		TObjectPtr<class UTextBlock> ScoreText;
+	UPROPERTY(meta = (BindWidget))
+		TObjectPtr<class UButton> OptionButton;
 public:
-	void OnUpdateScore(int32 Score);
+	UFUNCTION()
+		void OnUpdateScore(int32 Score);
 };

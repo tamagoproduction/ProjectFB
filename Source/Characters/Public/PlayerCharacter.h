@@ -7,6 +7,7 @@
 #include "PlayerCharacter.generated.h"
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnUpdateScoreDelegate, int32);
+DECLARE_MULTICAST_DELEGATE(FOnGameOverDelegate);
 
 UCLASS()
 class CHARACTERS_API APlayerCharacter : public ACharacter
@@ -49,6 +50,7 @@ private:
 			bool bFromSweep, const FHitResult& SweepResult);
 public:
 	FOnUpdateScoreDelegate OnUpdateScoreDelegate;
+	FOnGameOverDelegate OnGameOverDelegate;
 public:
 	FORCEINLINE int32 GetScore()
 	{

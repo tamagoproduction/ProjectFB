@@ -142,15 +142,18 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 		AGameGameMode* GameGameMode = Cast<AGameGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 		if (IsValid(GameGameMode))
 		{
-			if (GameInstance->GetBestScore() > Score)
+			if (GameInstance->GetBestScore() < Score)
 			{
 				GameInstance->SetBestScore(Score); //점수를 게임인스턴스에 저장
 			}
+			FString message2 = FString::Printf(TEXT("Score : %d"), GameInstance->GetBestScore());
+			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, message2);
 
 			// 게임 오버
-			GameGameMode->OnGameOver();
-			//TODO : 죽은경우 서버로 점수 저장
+			//GameGameMode->OnGameOver();
+			OnGameOverDelegate.Broadcast();
 			UGameplayStatics::SetGamePaused(GetWorld(), true);
+			//TODO : 죽은경우 서버로 점수 저장
 		}
 	}
 	if (IsValid(OtherActor) && OtherComp->ComponentHasTag(Keys::GameKeys::Pass))
@@ -162,6 +165,10 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 		}
 		FString message = FString::Printf(TEXT("Score : %d"), Score);
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, message);
+
+		FString message2 = FString::Printf(TEXT("Score : %d"), GameInstance->GetBestScore());
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, message2);
+		
 	}
 }
 

@@ -38,6 +38,12 @@ void AGameGameMode::BeginPlay()
 		GameOverWidget->AddToViewport();
 		GameOverWidget->SetVisibility(ESlateVisibility::Hidden); //°ÔÀÓ¿À¹ö À§Á¬À» ¼û°ÜÁÜ
 	}
+	APlayerCharacter* Player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	if (IsValid(Player))
+	{
+		Player->OnGameOverDelegate.AddUObject(this, &AGameGameMode::OnGameOver);
+	}
+
 }
 
 void AGameGameMode::OnGameOver()

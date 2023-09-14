@@ -20,9 +20,18 @@ public:
 		TObjectPtr<class UButton> RestartButton; // 재시작 버튼
 	UPROPERTY(meta = (BindWidget))
 		TObjectPtr<class UButton> MainButton; // 메인화면 돌아가기 버튼
+	UPROPERTY(meta = (BindWidget))
+		TObjectPtr<class UTextBlock> ScoreText; //점수 텍스트
+	UPROPERTY(meta = (BindWidget))
+		TObjectPtr<class UTextBlock> BestScoreText; //점수 텍스트
 public:
 	UFUNCTION()
 		void OnRestart();
 	UFUNCTION()
 		void OnMain();
+public:
+	UFUNCTION()
+		void OnUpdateScore(int32 Score);
+	UFUNCTION()
+		void OnUpdateBestScore();
 };
