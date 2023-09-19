@@ -43,3 +43,14 @@ GameoverWidget : Restart버튼 로직 구현 필요, Main버튼 클릭 시 GameL
 - Widgets : 위젯 정리용 모듈
   * MainWidget : Main화면에서 사용 위젯
   * GameOverWidget : GameMap에서 사용 위젯
+
+[230919/ldh]  
+- 프레임워크 수정(클래스 이름 협의 후 통일)  
+GameMap > FlappyWhaleMap, GameGameMode > FlappyWhaleGameMode, MainCamera > FlappyWhaleCamera로 클래스명 변경  
+- 스포너 오브젝트 풀 로직 수정  
+장애물 소환 직후 풀에 추가됨, 이후 다시 함수를 호출하면 직전에 소환된 장애물의 bActive가 false에 해당되어  
+풀에서 방금 소환된 장애물의 Pos를 다시 SpawnPos로 소환하는 버그 수정을 위해 bActive플래그의 기본값을 true로 설정  
+- 스포너 로직 추가/수정(랜덤, 주기)  
+-3~3범위의 랜덤값으로 spawnPos의 z값만 변경하여 랜덤위치 소환 로직 구현, 소환주기 1초로 하여 테스트, 정상작동 확인  
+- 장애물 사양 변경  
+Z축 Scale을 4 > 8로 변경, 위치는 +-300 > +-500으로 변경  
