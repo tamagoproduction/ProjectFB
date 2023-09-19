@@ -11,7 +11,7 @@ namespace Keys
 	namespace LevelKeys
 	{
 		const FName MainMap = TEXT("Main");
-		const FName GameMap = TEXT("Game");
+		const FName FlappyWhaleMap = TEXT("FlappyWhale");
 	}
 	namespace GameKeys
 	{

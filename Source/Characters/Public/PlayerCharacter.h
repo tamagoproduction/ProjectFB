@@ -31,7 +31,7 @@ private:
 		TObjectPtr<class UStaticMeshComponent> MyMesh;
 
 	// * 카메라
-	TWeakObjectPtr<class AMainCamera> MainCamera;
+	TWeakObjectPtr<class AFlappyWhaleCamera> FlappyWhaleCamera;
 	// * 게임인스턴스
 	TWeakObjectPtr<class UProjectGameInstance> GameInstance;
 

@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "GameGameMode.generated.h"
+#include "FlappyWhaleGameMode.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class GAMEMODES_API AGameGameMode : public AGameModeBase
+class GAMEMODES_API AFlappyWhaleGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 public:
-	AGameGameMode();
+	AFlappyWhaleGameMode();
 public:
 	virtual void BeginPlay() override;
 public:
@@ -22,10 +22,11 @@ public:
 		TSubclassOf<UUserWidget> GameOverWidgetClass;
 	UPROPERTY()
 		class UUserWidget* GameOverWidget;
+
 	UPROPERTY()
-		TSubclassOf<UUserWidget> GameWidgetClass;
+		TSubclassOf<UUserWidget> FlappyWhaleWidgetClass;
 	UPROPERTY()
-		class UUserWidget* GameWidget;
+		class UUserWidget* FlappyWhaleWidget;
 public:
 	UFUNCTION()
 		void OnGameOver();

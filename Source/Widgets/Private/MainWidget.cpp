@@ -15,5 +15,5 @@ void UMainWidget::NativeOnInitialized()
 
 void UMainWidget::OnStartGame()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::GameMap);
+	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::FlappyWhaleMap);
 }

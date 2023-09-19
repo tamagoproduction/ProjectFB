@@ -34,7 +34,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Obstacle")
 		float Speed = 1000.f;
 
-	bool bActive = false;
+	// 생성 직후 바로 사용하므로 기본값을 true로 설정
+	bool bActive = true;
 public:
 	void SetActive(bool isActive); //활성화 비활성화
 	void Deactivate(); //비활성화

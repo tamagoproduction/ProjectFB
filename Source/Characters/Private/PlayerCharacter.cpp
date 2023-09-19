@@ -2,11 +2,11 @@
 
 
 #include "PlayerCharacter.h"
-#include "MainCamera.h"
+#include "FlappyWhaleCamera.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/CapsuleComponent.h"
 #include "Obstacle.h"
-#include "GameGameMode.h"
+#include "FlappyWhaleGameMode.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "ProjectGameInstance.h"
@@ -80,15 +80,15 @@ void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	// * 카메라 액터 생성
-	MainCamera = GetWorld()->SpawnActor<AMainCamera>();
-	if (MainCamera.IsValid())
+	FlappyWhaleCamera = GetWorld()->SpawnActor<AFlappyWhaleCamera>();
+	if (FlappyWhaleCamera.IsValid())
 	{
 		// 컨트롤러 가져오기
 		APlayerController* PlayerController = Cast<APlayerController>(GetController());
 		if (IsValid(PlayerController))
 		{
 			// 시야를 해당 카메라로 설정
-			PlayerController->SetViewTargetWithBlend(MainCamera.Get());
+			PlayerController->SetViewTargetWithBlend(FlappyWhaleCamera.Get());
 			
 			// * 향상된 입력으로 컨텍스트 변경
 			UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem< UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
@@ -139,8 +139,8 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Blue, TEXT("Obstacle Collision Overlap"));
 
-		AGameGameMode* GameGameMode = Cast<AGameGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
-		if (IsValid(GameGameMode))
+		AFlappyWhaleGameMode* FlappyWhaleGameMode = Cast<AFlappyWhaleGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+		if (IsValid(FlappyWhaleGameMode))
 		{
 			if (GameInstance->GetBestScore() < Score)
 			{
@@ -150,7 +150,7 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, message2);
 
 			// 게임 오버
-			//GameGameMode->OnGameOver();
+			//FlappyWhaleGameMode->OnGameOver();
 			OnGameOverDelegate.Broadcast();
 			UGameplayStatics::SetGamePaused(GetWorld(), true);
 			//TODO : 죽은경우 서버로 점수 저장

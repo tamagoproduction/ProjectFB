@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "GameWidget.generated.h"
+#include "FlappyWhaleWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class WIDGETS_API UGameWidget : public UUserWidget
+class WIDGETS_API UFlappyWhaleWidget : public UUserWidget
 {
 	GENERATED_BODY()
 private:

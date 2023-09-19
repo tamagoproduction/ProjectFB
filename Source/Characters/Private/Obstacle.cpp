@@ -29,17 +29,16 @@ AObstacle::AObstacle()
 		UnderObstacleMesh->SetStaticMesh(MeshAsset.Object);
 	}
 
-
 	// Overlap 이벤트 활성화
 	AboveObstacleMesh->SetGenerateOverlapEvents(true);
 	UnderObstacleMesh->SetGenerateOverlapEvents(true);
 
 	//크기 변경
-	AboveObstacleMesh->SetRelativeScale3D(FVector(1, 1, 4));
-	UnderObstacleMesh->SetRelativeScale3D(FVector(1, 1, 4));
+	AboveObstacleMesh->SetRelativeScale3D(FVector(1, 1, 8));
+	UnderObstacleMesh->SetRelativeScale3D(FVector(1, 1, 8));
 	//위치 변경
-	AboveObstacleMesh->SetRelativeLocation(FVector(0, 0, 300));
-	UnderObstacleMesh->SetRelativeLocation(FVector(0, 0, -300));
+	AboveObstacleMesh->SetRelativeLocation(FVector(0, 0, 500));
+	UnderObstacleMesh->SetRelativeLocation(FVector(0, 0, -500));
 	//태그 추가
 	AboveObstacleMesh->ComponentTags.Add(Keys::GameKeys::Obstacle);
 	UnderObstacleMesh->ComponentTags.Add(Keys::GameKeys::Obstacle);
@@ -48,7 +47,6 @@ AObstacle::AObstacle()
 	PassCollision->SetRelativeLocation(FVector::Zero());
 	PassCollision->InitSphereRadius(60.f);
 	PassCollision->ComponentTags.Add(Keys::GameKeys::Pass);
-
 }
 
 // Called when the game starts or when spawned
@@ -86,4 +84,3 @@ void AObstacle::Deactivate()
 {
 	SetActive(false); //비활성화
 }
-

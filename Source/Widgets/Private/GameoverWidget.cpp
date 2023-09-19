@@ -26,7 +26,7 @@ void UGameOverWidget::NativeOnInitialized()
 
 void UGameOverWidget::OnRestart()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::GameMap);
+	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::FlappyWhaleMap);
 	//TODO : 광고 보여주기
 }
 
