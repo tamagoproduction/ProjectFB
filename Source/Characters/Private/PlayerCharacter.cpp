@@ -24,22 +24,31 @@ APlayerCharacter::APlayerCharacter()
 	// 시작위치 변경
 	RootComponent->SetWorldLocation(FVector(50.f, -600.f, 300.f));
 
-	// FBMesh 컴포넌트 생성 및 Root로 임시 지정
-	MyMesh = CreateDefaultSubobject<UStaticMeshComponent>("FBMesh");
-	if (IsValid(MyMesh))
+	// 고래 메시 가져오기
+	ConstructorHelpers::FObjectFinder<USkeletalMesh> WhaleMesh(TEXT("/Script/Engine.SkeletalMesh'/Game/Whale/Mesh/Whale_High.Whale_High'"));
+	if (WhaleMesh.Succeeded())
 	{
-		MyMesh->SetupAttachment(RootComponent);
-		// 큐브 스태틱 메시 가져오기
-		ConstructorHelpers::FObjectFinder<UStaticMesh> tempCube(TEXT("/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'"));
-		if (tempCube.Succeeded() && IsValid(tempCube.Object))
-		{
-			MyMesh->SetStaticMesh(tempCube.Object);
-			// 스케일 조절
-			MyMesh->SetRelativeScale3D(FVector(0.5f));
-			// 큐브를 폰처럼 행동하게 변경
-			MyMesh->SetCollisionProfileName("Pawn");
-		}
+		GetMesh()->SetSkeletalMesh(WhaleMesh.Object);
 	}
+	GetMesh()->SetRelativeLocation(FVector(0, -50, 0));
+	GetMesh()->SetRelativeRotation(FRotator(180, 0, 180));
+	GetMesh()->SetRelativeScale3D(FVector(10));
+
+	// * 애니메이션 블루프린트
+	ConstructorHelpers::FClassFinder<UAnimInstance> AnimAsset(TEXT("/Script/Engine.AnimBlueprint'/Game/Blueprint/Whale/ABP_Player.ABP_Player_C'"));
+	if (AnimAsset.Succeeded())
+	{
+		GetMesh()->SetAnimClass(AnimAsset.Class);
+	}
+
+	// * 점프 몽타주
+	ConstructorHelpers::FObjectFinder<UAnimMontage> JumpAsset(TEXT("/Script/Engine.AnimMontage'/Game/Blueprint/Whale/Whale_Jump_Mtg.Whale_Jump_Mtg'"));
+	if (JumpAsset.Succeeded())
+	{
+		JumpMontage = JumpAsset.Object;
+	}
+
+
 
 	// * 입력시스템
 	//#include "InputMappingContext.h"를 해야 FObjectFinder로 로드가 가능
@@ -89,7 +98,7 @@ void APlayerCharacter::BeginPlay()
 		{
 			// 시야를 해당 카메라로 설정
 			PlayerController->SetViewTargetWithBlend(FlappyWhaleCamera.Get());
-			
+
 			// * 향상된 입력으로 컨텍스트 변경
 			UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem< UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
 			if (SubSystem != nullptr)
@@ -99,7 +108,7 @@ void APlayerCharacter::BeginPlay()
 
 		}
 	}
-	
+
 	GameInstance = Cast<UProjectGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 }
 
@@ -107,6 +116,20 @@ void APlayerCharacter::BeginPlay()
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	// * 회전 구현
+	if (GetVelocity().Z > 0)
+	{
+		SetActorRotation(FRotator(0, 0, FMath::Lerp(GetActorRotation().Roll, -40.f, GetVelocity().Z * 0.02f * DeltaTime)));
+	}
+	else
+	{
+		SetActorRotation(FRotator(0, 0, FMath::Lerp(GetActorRotation().Roll, 90.f, -GetVelocity().Z * 0.005f * DeltaTime)));
+	}
+	FString message2 = FString::Printf(TEXT("%f, %f, %f"), GetVelocity().X, GetVelocity().Y, GetVelocity().Z);
+	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Red, message2);
+	FString message =  FString::Printf(TEXT("%f, %f, %f"), GetActorRotation().Roll, GetActorRotation().Pitch, GetActorRotation().Yaw);
+	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Purple, message);
 
 }
 
@@ -118,12 +141,18 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	if (Input != nullptr)
 	{
 		//키를 눌렀을때
-		Input->BindAction(JumpAction, ETriggerEvent::Started, this, &Super::Jump);
+		Input->BindAction(JumpAction, ETriggerEvent::Started, this, &APlayerCharacter::Jump);
 		//키를 땟을때
 		Input->BindAction(JumpAction, ETriggerEvent::Completed, this, &Super::StopJumping);
 	}
 	// * 점프 기능 외에 다른 조작법이 존재하지 않는다
 
+}
+
+void APlayerCharacter::Jump()
+{
+	Super::Jump();
+	PlayAnimMontage(JumpMontage);
 }
 
 void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -168,7 +197,7 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 
 		FString message2 = FString::Printf(TEXT("Score : %d"), GameInstance->GetBestScore());
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, message2);
-		
+
 	}
 }
 
