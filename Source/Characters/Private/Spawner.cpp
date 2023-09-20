@@ -53,4 +53,8 @@ void ASpawner::SpawnObstacle()
 	
 }
 
+void ASpawner::SpawnItem()
+{
+}
+
 

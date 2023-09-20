@@ -10,6 +10,8 @@
 #include "PlayerCharacter.h"
 #include "Keys.h"
 
+//#include "Kismet/KismetSystemLibrary.h"
+
 void UGameOverWidget::NativeOnInitialized()
 {
 	RestartButton->OnClicked.AddDynamic(this, &UGameOverWidget::OnRestart);
@@ -26,8 +28,18 @@ void UGameOverWidget::NativeOnInitialized()
 
 void UGameOverWidget::OnRestart()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::FlappyWhaleMap);
 	//TODO : 광고 보여주기
+	
+	// MainGameMode에서 게임 시작 시 미리 로드한 전면광고를 보여주기
+	// 정상적으로 로드했는지 && 광고가 사용 가능한지 체크
+	/*if (UKismetSystemLibrary::IsInterstitialAdRequested() &&
+		UKismetSystemLibrary::IsInterstitialAdAvailable())
+	{
+		UKismetSystemLibrary::ShowInterstitialAd();
+	}*/
+
+	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::FlappyWhaleMap);
+	
 }
 
 void UGameOverWidget::OnMain()

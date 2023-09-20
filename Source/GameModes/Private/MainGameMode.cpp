@@ -6,6 +6,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "MainCharacter.h"
 
+//#include "Kismet/KismetSystemLibrary.h"
+
 AMainGameMode::AMainGameMode()
 {
 	static ConstructorHelpers::FClassFinder<UUserWidget> WidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_MainWidget.BP_MainWidget_C'"));
@@ -25,4 +27,7 @@ void AMainGameMode::BeginPlay()
 		MainWidget = CreateWidget<UUserWidget>(GetWorld(), MainWidgetClass);
 		MainWidget->AddToViewport();
 	}
+
+	// 게임 시작 시 전면광고 로드
+	//UKismetSystemLibrary::LoadInterstitialAd(0);
 }

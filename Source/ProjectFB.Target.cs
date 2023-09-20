@@ -15,5 +15,14 @@ public class ProjectFBTarget : TargetRules
 		//ExtraModuleNames.Add("Widgets");
 		//ExtraModuleNames.Add("GameModes");
 		//ExtraModuleNames.Add("Characters");
+
+		// 광고를 위한 모듈 추가
+		// Android 모듈
+		/*if (Target.Platform == UnrealTargetPlatform.Android)
+		{
+			ModuleNames.Add("OnlineSubsystemGooglePlay");
+			ModuleNames.Add("OnlineSubsystem");
+			ModuleNames.Add("AndroidAdvertising");
+		}*/
 	}
 }

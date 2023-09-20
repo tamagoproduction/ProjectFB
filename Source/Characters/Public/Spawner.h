@@ -30,4 +30,6 @@ private:
 private:
 	UFUNCTION()
 		void SpawnObstacle();
+	UFUNCTION()
+		void SpawnItem();
 };
