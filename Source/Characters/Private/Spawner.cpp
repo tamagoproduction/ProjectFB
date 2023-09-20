@@ -38,7 +38,6 @@ void ASpawner::SpawnObstacle()
 			if (!item->GetIsActive())
 			{
 				item->SetActive(true);
-				//item->SetActorRelativeLocation(SpawnPos);
 				item->SetActorLocation(SpawnPos);
 
 				return;

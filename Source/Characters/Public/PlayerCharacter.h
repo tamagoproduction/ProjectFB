@@ -24,11 +24,15 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	virtual void Jump() override;
 private:
 	// * Mesh
 // 임시로 사용할 cube형태의 static mesh 이용
-	UPROPERTY(VisibleAnywhere, Category = "Mesh")
-		TObjectPtr<class UStaticMeshComponent> MyMesh;
+	//UPROPERTY(VisibleAnywhere, Category = "Mesh")
+	//	TObjectPtr<class UStaticMeshComponent> MyMesh;
+	UPROPERTY(VisibleAnywhere, Category = "Montage")
+		TObjectPtr<class UAnimMontage> JumpMontage;
 
 	// * 카메라
 	TWeakObjectPtr<class AFlappyWhaleCamera> FlappyWhaleCamera;
