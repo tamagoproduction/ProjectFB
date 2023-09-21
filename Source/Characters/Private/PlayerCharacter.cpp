@@ -66,7 +66,7 @@ APlayerCharacter::APlayerCharacter()
 	GetCapsuleComponent()->SetHiddenInGame(false);
 
 	// 캡슐 컴포넌트 크기 변경
-	GetCapsuleComponent()->SetCapsuleSize(40.f, 40.f);
+	GetCapsuleComponent()->SetCapsuleSize(75.f, 75.f);
 	// 캡슐 collision profile 변경
 	GetCapsuleComponent()->SetCollisionProfileName("OverlapAllDynamic");
 	// 캡슐에 Overlap 이벤트 활성화
@@ -76,8 +76,8 @@ APlayerCharacter::APlayerCharacter()
 
 	// 연속 점프 카운트
 	JumpMaxCount = INT_MAX;
-	// 점프 속도 조절, 기본값 420
-	GetCharacterMovement()->JumpZVelocity = 500.f;
+	// 점프 속도 조절
+	GetCharacterMovement()->JumpZVelocity = JumpSpeed;
 
 	Score = 0;
 }

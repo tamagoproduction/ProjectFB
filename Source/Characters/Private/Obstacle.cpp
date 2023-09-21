@@ -37,15 +37,15 @@ AObstacle::AObstacle()
 	AboveObstacleMesh->SetRelativeScale3D(FVector(1, 1, 8));
 	UnderObstacleMesh->SetRelativeScale3D(FVector(1, 1, 8));
 	//위치 변경
-	AboveObstacleMesh->SetRelativeLocation(FVector(0, 0, 500));
-	UnderObstacleMesh->SetRelativeLocation(FVector(0, 0, -500));
+	AboveObstacleMesh->SetRelativeLocation(FVector(0, 0, 600));
+	UnderObstacleMesh->SetRelativeLocation(FVector(0, 0, -600));
 	//태그 추가
 	AboveObstacleMesh->ComponentTags.Add(Keys::GameKeys::Obstacle);
 	UnderObstacleMesh->ComponentTags.Add(Keys::GameKeys::Obstacle);
 
 	//가운데 콜리전 초기 설정
 	PassCollision->SetRelativeLocation(FVector::Zero());
-	PassCollision->InitSphereRadius(60.f);
+	PassCollision->InitSphereRadius(100.f);
 	PassCollision->ComponentTags.Add(Keys::GameKeys::Pass);
 }
 

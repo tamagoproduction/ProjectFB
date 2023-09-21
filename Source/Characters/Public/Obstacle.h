@@ -32,7 +32,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
 		TObjectPtr<class USphereComponent> PassCollision; //가운데 충돌체크
 	UPROPERTY(EditAnywhere, Category = "Obstacle")
-		float Speed = 1000.f;
+		float Speed = 700.f;
 
 	// 생성 직후 바로 사용하므로 기본값을 true로 설정
 	bool bActive = true;

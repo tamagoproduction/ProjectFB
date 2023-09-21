@@ -28,9 +28,6 @@ public:
 	virtual void Jump() override;
 private:
 	// * Mesh
-// 임시로 사용할 cube형태의 static mesh 이용
-	//UPROPERTY(VisibleAnywhere, Category = "Mesh")
-	//	TObjectPtr<class UStaticMeshComponent> MyMesh;
 	UPROPERTY(VisibleAnywhere, Category = "Montage")
 		TObjectPtr<class UAnimMontage> JumpMontage;
 
@@ -41,6 +38,10 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Score")
 		int32 Score;
+
+	// 점프 속도 변수, 기본값 420
+	float JumpSpeed = 600.f;
+
 private: //향상된 입력 시스템
 	UPROPERTY(VisibleAnywhere, Category = Input)
 		TObjectPtr<class UInputMappingContext> DefaultMappingContext;
