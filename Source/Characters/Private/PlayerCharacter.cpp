@@ -70,7 +70,7 @@ APlayerCharacter::APlayerCharacter()
 	GetCapsuleComponent()->SetHiddenInGame(false);
 
 	// 캡슐 컴포넌트 크기 변경
-	GetCapsuleComponent()->SetCapsuleSize(20.f, 20.f);
+	GetCapsuleComponent()->SetCapsuleSize(25.f, 25.f);
 	// 캡슐 collision profile 변경
 	GetCapsuleComponent()->SetCollisionProfileName("OverlapAllDynamic");
 	// 캡슐에 Overlap 이벤트 활성화

@@ -73,7 +73,7 @@ AObstacle::AObstacle()
 
 	//가운데 콜리전 초기 설정
 	PassCollision->SetRelativeLocation(FVector::Zero());
-	PassCollision->InitCapsuleSize(30, 700);
+	PassCollision->InitCapsuleSize(50, 700);
 	PassCollision->ComponentTags.Add(Keys::GameKeys::Pass);
 	PassCollision->SetHiddenInGame(false);
 }
