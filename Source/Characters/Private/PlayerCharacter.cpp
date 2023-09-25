@@ -66,7 +66,7 @@ APlayerCharacter::APlayerCharacter()
 	GetCapsuleComponent()->SetHiddenInGame(false);
 
 	// 캡슐 컴포넌트 크기 변경
-	GetCapsuleComponent()->SetCapsuleSize(75.f, 75.f);
+	GetCapsuleComponent()->SetCapsuleSize(25.f, 25.f);
 	// 캡슐 collision profile 변경
 	GetCapsuleComponent()->SetCollisionProfileName("OverlapAllDynamic");
 	// 캡슐에 Overlap 이벤트 활성화
@@ -159,7 +159,7 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, message);
 	}
 
-	//충돌상 상대가 유효하고 장애물 태그를 가지고 있다면
+	//충돌 상대가 유효하고 장애물 태그를 가지고 있다면
 	if (IsValid(OtherActor) && OtherComp->ComponentHasTag(Keys::GameKeys::Obstacle))
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Blue, TEXT("Obstacle Collision Overlap"));

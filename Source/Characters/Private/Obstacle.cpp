@@ -3,7 +3,7 @@
 
 #include "Obstacle.h"
 
-#include "Components/SphereComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "MainCharacter.h"
 #include "Keys.h"
 
@@ -13,40 +13,69 @@ AObstacle::AObstacle()
 	PrimaryActorTick.bCanEverTick = true;
 
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	AboveObstacleMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("AboveObstacleMesh"));
-	UnderObstacleMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("UnderObstacleMesh"));
-	PassCollision = CreateDefaultSubobject<USphereComponent>(TEXT("PassCollision"));
+	Above = CreateDefaultSubobject<USceneComponent>(TEXT("Above"));
+	Under = CreateDefaultSubobject<USceneComponent>(TEXT("Under"));
+	AbovePillarMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("AboveObstacleMesh"));
+	AboveCapMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("AbovePillarCapMesh"));
+	UnderPillarMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("UnderObstacleMesh"));
+	UnderCapMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("UnderPillarCapMesh"));
+	PassCollision = CreateDefaultSubobject<UCapsuleComponent>(TEXT("PassCollision"));
 
 	RootComponent = Root;
-	AboveObstacleMesh->SetupAttachment(Root);
-	UnderObstacleMesh->SetupAttachment(Root);
+	Above->SetupAttachment(Root);
+	Under->SetupAttachment(Root);
 	PassCollision->SetupAttachment(Root);
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Script/Engine.StaticMesh'/Engine/BasicShapes/Cylinder.Cylinder'"));
-	if (MeshAsset.Succeeded())
+	AbovePillarMesh->SetupAttachment(Above);
+	AboveCapMesh->SetupAttachment(Above);
+
+	UnderCapMesh->SetupAttachment(Under);
+	UnderPillarMesh->SetupAttachment(Under);
+
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> PillarMeshAsset(TEXT("/Script/Engine.StaticMesh'/Game/Pillar/Mesh/ClassicColumnC_LOD0_ClassicColumnPillarC_LOD_0.ClassicColumnC_LOD0_ClassicColumnPillarC_LOD_0'"));
+	if (PillarMeshAsset.Succeeded())
 	{
-		AboveObstacleMesh->SetStaticMesh(MeshAsset.Object);
-		UnderObstacleMesh->SetStaticMesh(MeshAsset.Object);
+		AbovePillarMesh->SetStaticMesh(PillarMeshAsset.Object);
+		UnderPillarMesh->SetStaticMesh(PillarMeshAsset.Object);
+	}
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> CapMeshAsset(TEXT("/Script/Engine.StaticMesh'/Game/Pillar/Mesh/ClassicColumnC_LOD0_ClassicColumnCapC_LOD_0.ClassicColumnC_LOD0_ClassicColumnCapC_LOD_0'"));
+	if (CapMeshAsset.Succeeded())
+	{
+		AboveCapMesh->SetStaticMesh(CapMeshAsset.Object);
+		UnderCapMesh->SetStaticMesh(CapMeshAsset.Object);
 	}
 
+
 	// Overlap 이벤트 활성화
-	AboveObstacleMesh->SetGenerateOverlapEvents(true);
-	UnderObstacleMesh->SetGenerateOverlapEvents(true);
+	AbovePillarMesh->SetGenerateOverlapEvents(true);
+	AboveCapMesh->SetGenerateOverlapEvents(true);
+	UnderPillarMesh->SetGenerateOverlapEvents(true);
+	UnderCapMesh->SetGenerateOverlapEvents(true);
 
 	//크기 변경
-	AboveObstacleMesh->SetRelativeScale3D(FVector(1, 1, 8));
-	UnderObstacleMesh->SetRelativeScale3D(FVector(1, 1, 8));
+	AbovePillarMesh->SetRelativeScale3D(FVector(70));
+	AboveCapMesh->SetRelativeScale3D(FVector(70));
+	UnderPillarMesh->SetRelativeScale3D(FVector(70));
+	UnderCapMesh->SetRelativeScale3D(FVector(70));
+
+	//회전
+	Above->SetRelativeRotation(FRotator(180, 0, 0));
+
 	//위치 변경
-	AboveObstacleMesh->SetRelativeLocation(FVector(0, 0, 600));
-	UnderObstacleMesh->SetRelativeLocation(FVector(0, 0, -600));
+	Above->SetRelativeLocation(FVector(0, 0, 900));
+	Under->SetRelativeLocation(FVector(0, 0, -900));
+
 	//태그 추가
-	AboveObstacleMesh->ComponentTags.Add(Keys::GameKeys::Obstacle);
-	UnderObstacleMesh->ComponentTags.Add(Keys::GameKeys::Obstacle);
+	AbovePillarMesh->ComponentTags.Add(Keys::GameKeys::Obstacle);
+	AboveCapMesh->ComponentTags.Add(Keys::GameKeys::Obstacle);
+	UnderPillarMesh->ComponentTags.Add(Keys::GameKeys::Obstacle);
+	UnderCapMesh->ComponentTags.Add(Keys::GameKeys::Obstacle);
 
 	//가운데 콜리전 초기 설정
 	PassCollision->SetRelativeLocation(FVector::Zero());
-	PassCollision->InitSphereRadius(100.f);
+	PassCollision->InitCapsuleSize(30, 700);
 	PassCollision->ComponentTags.Add(Keys::GameKeys::Pass);
+	PassCollision->SetHiddenInGame(false);
 }
 
 // Called when the game starts or when spawned

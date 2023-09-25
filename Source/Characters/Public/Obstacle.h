@@ -26,11 +26,20 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
 		TObjectPtr<class USceneComponent> Root; //루트 컴포넌트
 	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
-		TObjectPtr<class UStaticMeshComponent> AboveObstacleMesh; //위에 장애물
+		TObjectPtr<class USceneComponent> Above; //루트 컴포넌트
 	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
-		TObjectPtr<class UStaticMeshComponent> UnderObstacleMesh; //아래 장애물
+		TObjectPtr<class USceneComponent> Under; //루트 컴포넌트
+
 	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
-		TObjectPtr<class USphereComponent> PassCollision; //가운데 충돌체크
+		TObjectPtr<class UStaticMeshComponent> AbovePillarMesh; //위 기둥
+	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
+		TObjectPtr<class UStaticMeshComponent> AboveCapMesh; //위 기둥 캡
+	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
+		TObjectPtr<class UStaticMeshComponent> UnderPillarMesh; //아래 기둥
+	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
+		TObjectPtr<class UStaticMeshComponent> UnderCapMesh; //아래 기둥 캡
+	UPROPERTY(VisibleAnywhere, Category = "Obstacle")
+		TObjectPtr<class UCapsuleComponent> PassCollision; //가운데 충돌체크
 	UPROPERTY(EditAnywhere, Category = "Obstacle")
 		float Speed = 700.f;
 
