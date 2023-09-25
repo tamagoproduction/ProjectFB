@@ -6,6 +6,16 @@
 #include "Engine/DataTable.h"
 #include "ItemStruct.generated.h"
 
+// 아이템 효과 열거형
+UENUM(BlueprintType)
+enum class EItem : uint8
+{
+	None UMETA(Display = "None"),
+	Slower UMETA(Display = "Slower"),
+	Faster UMETA(Display = "Faster"),
+	Invincible UMETA(Display = "Invincible")
+};
+
 USTRUCT(BlueprintType)
 struct FItemData : public FTableRowBase
 {
@@ -14,17 +24,17 @@ struct FItemData : public FTableRowBase
 public:
 	FItemData() {}
 
-	UPROPERTY(BlueprintReadWrite)
-		FString ItemName;
-	UPROPERTY(BlueprintReadWrite)
-		class UStaticMesh* ItemMesh;
-	
-	// 아이템을 먹었을 때 나타낼 효과
-	// player에 enum으로 state를 만들어 줄 것인가?
-	// 또는 함수 실행을 할 것인가?
-	// 고민 필요
-};
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		FString ItemName = "Default";
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		class UStaticMesh* ItemMesh = nullptr;
 
+	// 아이템을 먹었을 때 나타낼 효과
+	// 해당 변수를 통해 ItemComponent가 추가 효과를 적용
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		EItem ItemType = EItem::None;
+
+};
 /**
  * 
  */

@@ -15,6 +15,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Keys.h"
+#include "Item.h"
+#include "ItemComponent.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -61,12 +63,14 @@ APlayerCharacter::APlayerCharacter()
 		JumpMontage = JumpAsset.Object;
 	}
 
+	// ItemComponent
+	//ItemComponent = CreateDefaultSubobject<UItemComponent>(TEXT("ItemComponent"));
 
 	// 캡슐 시각화 옵션
 	GetCapsuleComponent()->SetHiddenInGame(false);
 
 	// 캡슐 컴포넌트 크기 변경
-	GetCapsuleComponent()->SetCapsuleSize(25.f, 25.f);
+	GetCapsuleComponent()->SetCapsuleSize(20.f, 20.f);
 	// 캡슐 collision profile 변경
 	GetCapsuleComponent()->SetCollisionProfileName("OverlapAllDynamic");
 	// 캡슐에 Overlap 이벤트 활성화
@@ -181,6 +185,7 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 			//TODO : 죽은경우 서버로 점수 저장
 		}
 	}
+	// pass 충돌
 	if (IsValid(OtherActor) && OtherComp->ComponentHasTag(Keys::GameKeys::Pass))
 	{
 		Score++;
@@ -195,5 +200,15 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, message2);
 		
 	}
+	// 아이템 충돌
+	/*if (IsValid(OtherActor) && OtherComp->ComponentHasTag(Keys::GameKeys::Item))
+	{
+		if (IsValid(ItemComponent))
+		{
+			AItem* Item = Cast<AItem>(OtherActor);
+			if(IsValid(Item))
+				ItemComponent->CheckItem(Item);
+		}
+	}*/
 }
 

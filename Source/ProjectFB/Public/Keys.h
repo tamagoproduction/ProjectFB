@@ -17,5 +17,6 @@ namespace Keys
 	{
 		const FName Obstacle = TEXT("Obstacle");
 		const FName Pass = TEXT("Pass");
+		const FName Item = TEXT("Item");
 	}
 }

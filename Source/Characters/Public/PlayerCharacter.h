@@ -35,6 +35,9 @@ private:
 	TWeakObjectPtr<class AFlappyWhaleCamera> FlappyWhaleCamera;
 	// * 게임인스턴스
 	TWeakObjectPtr<class UProjectGameInstance> GameInstance;
+	// * 아이템 컴포넌트
+	/*UPROPERTY(VisibleAnywhere)
+		class UItemComponent* ItemComponent;*/
 
 	UPROPERTY(VisibleAnywhere, Category = "Score")
 		int32 Score;
