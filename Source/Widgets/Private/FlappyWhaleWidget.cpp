@@ -4,6 +4,7 @@
 #include "FlappyWhaleWidget.h"
 
 #include "Components/TextBlock.h"
+#include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
 #include "PlayerCharacter.h"
 
@@ -16,10 +17,17 @@ void UFlappyWhaleWidget::NativeOnInitialized()
 		Player->OnUpdateScoreDelegate.AddUObject(this, &UFlappyWhaleWidget::OnUpdateScore);
 	}
 	ScoreText->SetText(FText::FromString(TEXT("0")));
+
+	OptionButton->OnClicked.AddDynamic(this, &UFlappyWhaleWidget::OnOptionWidget);
 }
 
 void UFlappyWhaleWidget::OnUpdateScore(int32 Score)
 {
 	FString ScoreStr = FString::Printf(TEXT("%d"), Score);
 	ScoreText->SetText(FText::FromString(ScoreStr));
+}
+
+void UFlappyWhaleWidget::OnOptionWidget()
+{
+	OptionWidget->SetVisibility(ESlateVisibility::Visible);
 }

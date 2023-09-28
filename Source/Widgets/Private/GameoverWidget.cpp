@@ -14,6 +14,7 @@
 
 void UGameOverWidget::NativeOnInitialized()
 {
+	Super::NativeOnInitialized();
 	RestartButton->OnClicked.AddDynamic(this, &UGameOverWidget::OnRestart);
 	MainButton->OnClicked.AddDynamic(this, &UGameOverWidget::OnMain);
 
@@ -39,7 +40,6 @@ void UGameOverWidget::OnRestart()
 	}*/
 
 	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::FlappyWhaleMap);
-	
 }
 
 void UGameOverWidget::OnMain()

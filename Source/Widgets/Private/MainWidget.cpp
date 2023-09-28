@@ -11,9 +11,15 @@ void UMainWidget::NativeOnInitialized()
 	Super::NativeOnInitialized();
 
 	StartButton->OnClicked.AddDynamic(this, &UMainWidget::OnStartGame);
+	OptionButton->OnClicked.AddDynamic(this, &UMainWidget::OnOptionWidget);
 }
 
 void UMainWidget::OnStartGame()
 {
 	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::FlappyWhaleMap);
+}
+
+void UMainWidget::OnOptionWidget()
+{
+	OptionWidget->SetVisibility(ESlateVisibility::Visible);
 }

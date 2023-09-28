@@ -6,20 +6,40 @@
 #include "Blueprint/UserWidget.h"
 #include "Kismet/GameplayStatics.h"
 #include "PlayerCharacter.h"
+#include "Components/AudioComponent.h"
+#include "FlappyWhaleWidget.h"
+#include "OptionWidget.h"
 
 AFlappyWhaleGameMode::AFlappyWhaleGameMode()
 {
 	DefaultPawnClass = APlayerCharacter::StaticClass();
 
+	// * ∞‘¿”√¢ ¿ß¡¨
 	static ConstructorHelpers::FClassFinder<UUserWidget> FlappyWhaleWidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_FlappyWhaleWidget.BP_FlappyWhaleWidget_C'"));
 	if (FlappyWhaleWidgetAsset.Succeeded())
 	{
 		FlappyWhaleWidgetClass = FlappyWhaleWidgetAsset.Class;
 	}
+	// * ∞‘¿”¡æ∑· ¿ß¡¨
 	static ConstructorHelpers::FClassFinder<UUserWidget> GameOverWidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_GameOverWidget.BP_GameOverWidget_C'"));
 	if (GameOverWidgetAsset.Succeeded())
 	{
 		GameOverWidgetClass = GameOverWidgetAsset.Class;
+	}
+	// * ø…º«√¢ ¿ß¡¨
+	static ConstructorHelpers::FClassFinder<UUserWidget> OptionWidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_OptionWidget.BP_OptionWidget'"));
+	if (OptionWidgetAsset.Succeeded())
+	{
+		OptionWidgetClass = OptionWidgetAsset.Class;
+	}
+
+	// * ªÁøÓµÂ
+	BackGroundAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("BackGroundAudio"));
+
+	static ConstructorHelpers::FObjectFinder<USoundWave> AudioAsset(TEXT("/Script/Engine.SoundWave'/Game/Sound/BackGround/GameBackGroundSound.GameBackGroundSound'"));
+	if (AudioAsset.Succeeded())
+	{
+		BackGroundAudio->SetSound(AudioAsset.Object);
 	}
 }
 
@@ -28,7 +48,7 @@ void AFlappyWhaleGameMode::BeginPlay()
 	Super::BeginPlay();
 	if (FlappyWhaleWidgetClass != nullptr)
 	{
-		FlappyWhaleWidget = CreateWidget<UUserWidget>(GetWorld(), FlappyWhaleWidgetClass);
+		FlappyWhaleWidget = CreateWidget<UFlappyWhaleWidget>(GetWorld(), FlappyWhaleWidgetClass);
 		FlappyWhaleWidget->AddToViewport();
 	}
 
@@ -38,6 +58,15 @@ void AFlappyWhaleGameMode::BeginPlay()
 		GameOverWidget->AddToViewport();
 		GameOverWidget->SetVisibility(ESlateVisibility::Hidden); //∞‘¿”ø¿πˆ ¿ß¡¨¿ª º˚∞‹¡‹
 	}
+
+	if (OptionWidgetClass != nullptr)
+	{
+		OptionWidget = CreateWidget<UOptionWidget>(GetWorld(), OptionWidgetClass);
+		OptionWidget->AddToViewport();
+		FlappyWhaleWidget->OptionWidget = OptionWidget;
+		OptionWidget->SetVisibility(ESlateVisibility::Hidden);
+	}
+
 	APlayerCharacter* Player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	if (IsValid(Player))
 	{

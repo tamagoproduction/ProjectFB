@@ -21,7 +21,11 @@ public:
 	UPROPERTY()
 		TSubclassOf<UUserWidget> MainWidgetClass;
 	UPROPERTY()
-		class UUserWidget* MainWidget;
-
-
+		TObjectPtr<class UMainWidget> MainWidget;
+	UPROPERTY()
+		TSubclassOf<UUserWidget> OptionWidgetClass;
+	UPROPERTY()
+		TObjectPtr<class UOptionWidget> OptionWidget;
+	UPROPERTY(VisibleAnywhere)
+		TObjectPtr<class UAudioComponent> BackGroundAudio;
 };

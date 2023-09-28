@@ -20,7 +20,11 @@ public:
 		TObjectPtr<class UButton> StartButton; //게임시작 버튼
 	UPROPERTY(meta = (BindWidget))
 		TObjectPtr<class UButton> OptionButton; //환경설정 버튼
+	UPROPERTY()
+		TObjectPtr<class UUserWidget> OptionWidget; //옵션위젯
 public:
 	UFUNCTION()
 		void OnStartGame();
+	UFUNCTION()
+		void OnOptionWidget();
 };

@@ -8,7 +8,7 @@ public class Widgets : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "ProjectFB", "Characters", "GameModes"});
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "ProjectFB", "Characters", "GameModes", "Slate", "SlateCore", "UMG"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

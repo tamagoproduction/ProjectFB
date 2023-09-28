@@ -1165,37 +1165,3 @@ LogConfig: CVar [[r.Occlusion.SingleRHIThreadStall:1]] deferred - dummy variable
 [2023.09.28-14.53.33:452][ 55]LogOnline: OSS: Created online subsystem instance for: :Context_1
 [2023.09.28-14.53.33:457][ 55]PIE: 서버가 로그인했습니다.
 [2023.09.28-14.53.33:457][ 55]PIE: 에디터에서 플레이 총 시작 시간 0.054초입니다.
-[2023.09.28-14.53.36:072][146]LogWindows: Error: === Critical error: ===
-[2023.09.28-14.53.36:072][146]LogWindows: Error: 
-[2023.09.28-14.53.36:072][146]LogWindows: Error: Fatal error!
-[2023.09.28-14.53.36:072][146]LogWindows: Error: 
-[2023.09.28-14.53.36:072][146]LogWindows: Error: Unhandled Exception: EXCEPTION_ACCESS_VIOLATION reading address 0x0000000000000000
-[2023.09.28-14.53.36:072][146]LogWindows: Error: 
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd178b9de5 UnrealEditor-Widgets.dll!UMainWidget::OnOptionWidget() [D:\Github\ProjectFB\Source\Widgets\Private\MainWidget.cpp:24]
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd5607d280 UnrealEditor-CoreUObject.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd5638828f UnrealEditor-CoreUObject.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd530d4e17 UnrealEditor-UMG.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd531aba97 UnrealEditor-UMG.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd53132dc6 UnrealEditor-UMG.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd5560a5fa UnrealEditor-Slate.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd5560df65 UnrealEditor-Slate.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd5562f3e8 UnrealEditor-Slate.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd55383b5a UnrealEditor-Slate.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd553ee365 UnrealEditor-Slate.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd553db562 UnrealEditor-Slate.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd553ce2fa UnrealEditor-Slate.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd6a317dc6 UnrealEditor-ApplicationCore.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd6a2fb83f UnrealEditor-ApplicationCore.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd6a31ab29 UnrealEditor-ApplicationCore.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd6a2f32e3 UnrealEditor-ApplicationCore.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffdade9e858 USER32.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffdade9e299 USER32.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffd6a31c226 UnrealEditor-ApplicationCore.dll!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ff78c8276f2 UnrealEditor.exe!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ff78c84d28c UnrealEditor.exe!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ff78c84d37a UnrealEditor.exe!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ff78c850854 UnrealEditor.exe!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ff78c866984 UnrealEditor.exe!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ff78c869d7a UnrealEditor.exe!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: [Callstack] 0x00007ffdac3a7344 KERNEL32.DLL!UnknownFunction []
-[2023.09.28-14.53.36:072][146]LogWindows: Error: 

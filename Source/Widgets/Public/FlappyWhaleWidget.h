@@ -20,7 +20,11 @@ public:
 		TObjectPtr<class UTextBlock> ScoreText;
 	UPROPERTY(meta = (BindWidget))
 		TObjectPtr<class UButton> OptionButton;
+	UPROPERTY()
+		TObjectPtr<class UUserWidget> OptionWidget; //¿É¼ÇÀ§Á¬
 public:
 	UFUNCTION()
 		void OnUpdateScore(int32 Score);
+	UFUNCTION()
+		void OnOptionWidget();
 };

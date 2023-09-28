@@ -21,12 +21,20 @@ public:
 	UPROPERTY()
 		TSubclassOf<UUserWidget> GameOverWidgetClass;
 	UPROPERTY()
-		class UUserWidget* GameOverWidget;
+		TObjectPtr<UUserWidget> GameOverWidget;
 
 	UPROPERTY()
 		TSubclassOf<UUserWidget> FlappyWhaleWidgetClass;
 	UPROPERTY()
-		class UUserWidget* FlappyWhaleWidget;
+		TObjectPtr<class UFlappyWhaleWidget> FlappyWhaleWidget;
+
+	UPROPERTY()
+		TSubclassOf<UUserWidget> OptionWidgetClass;
+	UPROPERTY()
+		TObjectPtr<class UOptionWidget> OptionWidget;
+
+	UPROPERTY(VisibleAnywhere)
+		TObjectPtr<class UAudioComponent> BackGroundAudio;
 public:
 	UFUNCTION()
 		void OnGameOver();
