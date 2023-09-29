@@ -28,4 +28,9 @@ public:
 		TObjectPtr<class UOptionWidget> OptionWidget;
 	UPROPERTY(VisibleAnywhere)
 		TObjectPtr<class UAudioComponent> BackGroundAudio;
+	UPROPERTY()
+		TObjectPtr<class UProjectGameInstance> ProjectGameInstance;
+public:
+	UFUNCTION()
+		void OnBackGroundSoundValueChange(float Value);
 };

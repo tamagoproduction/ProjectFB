@@ -9,6 +9,7 @@
 #include "Components/AudioComponent.h"
 #include "FlappyWhaleWidget.h"
 #include "OptionWidget.h"
+#include "ProjectGameInstance.h"
 
 AFlappyWhaleGameMode::AFlappyWhaleGameMode()
 {
@@ -27,7 +28,7 @@ AFlappyWhaleGameMode::AFlappyWhaleGameMode()
 		GameOverWidgetClass = GameOverWidgetAsset.Class;
 	}
 	// * 옵션창 위젯
-	static ConstructorHelpers::FClassFinder<UUserWidget> OptionWidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_OptionWidget.BP_OptionWidget'"));
+	static ConstructorHelpers::FClassFinder<UUserWidget> OptionWidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_OptionWidget.BP_OptionWidget_C'"));
 	if (OptionWidgetAsset.Succeeded())
 	{
 		OptionWidgetClass = OptionWidgetAsset.Class;
@@ -46,6 +47,8 @@ AFlappyWhaleGameMode::AFlappyWhaleGameMode()
 void AFlappyWhaleGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+	//마우스를 보여줌
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
 	if (FlappyWhaleWidgetClass != nullptr)
 	{
 		FlappyWhaleWidget = CreateWidget<UFlappyWhaleWidget>(GetWorld(), FlappyWhaleWidgetClass);
@@ -65,6 +68,7 @@ void AFlappyWhaleGameMode::BeginPlay()
 		OptionWidget->AddToViewport();
 		FlappyWhaleWidget->OptionWidget = OptionWidget;
 		OptionWidget->SetVisibility(ESlateVisibility::Hidden);
+		OptionWidget->OnBackGroundSoundValueChange.AddUObject(this, &AFlappyWhaleGameMode::OnBackGroundSoundValueChange);
 	}
 
 	APlayerCharacter* Player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
@@ -73,11 +77,23 @@ void AFlappyWhaleGameMode::BeginPlay()
 		Player->OnGameOverDelegate.AddUObject(this, &AFlappyWhaleGameMode::OnGameOver);
 	}
 
+	 ProjectGameInstance = Cast<UProjectGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 }
 
 void AFlappyWhaleGameMode::OnGameOver()
 {
-	//마우스를 보여줌
-	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
 	GameOverWidget->SetVisibility(ESlateVisibility::Visible); //게임오버 위젯을 보여줌
+}
+
+void AFlappyWhaleGameMode::OnBackGroundSoundValueChange(float Value)
+{
+	ProjectGameInstance->BackGroundSoundValue = Value;
+	BackGroundAudio->SetVolumeMultiplier(Value != 0 ? Value : 0.001f);
+	if (Value == 0)
+		BackGroundAudio->SetAutoActivate(false);
+	else
+		BackGroundAudio->SetAutoActivate(true);
+	FString Message = FString::Printf(TEXT("SoundValue : %f"), Value);
+	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, Message);
+
 }

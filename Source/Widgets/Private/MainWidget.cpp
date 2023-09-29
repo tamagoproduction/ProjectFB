@@ -21,5 +21,8 @@ void UMainWidget::OnStartGame()
 
 void UMainWidget::OnOptionWidget()
 {
-	OptionWidget->SetVisibility(ESlateVisibility::Visible);
+	if (OptionWidget != nullptr)
+	{
+		OptionWidget->SetVisibility(ESlateVisibility::Visible);
+	}
 }

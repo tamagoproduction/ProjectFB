@@ -19,6 +19,11 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Score")
 		int32 BestScore;
 public:
+	UPROPERTY(VisibleAnywhere, Category = "Sound")
+		float BackGroundSoundValue;
+	UPROPERTY(VisibleAnywhere, Category = "Sound")
+		float EffectSoundValue;
+public:
 	FORCEINLINE void SetBestScore(int32 value)
 	{
 		BestScore = value;

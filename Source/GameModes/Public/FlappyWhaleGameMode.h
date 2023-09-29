@@ -27,15 +27,17 @@ public:
 		TSubclassOf<UUserWidget> FlappyWhaleWidgetClass;
 	UPROPERTY()
 		TObjectPtr<class UFlappyWhaleWidget> FlappyWhaleWidget;
-
 	UPROPERTY()
 		TSubclassOf<UUserWidget> OptionWidgetClass;
 	UPROPERTY()
 		TObjectPtr<class UOptionWidget> OptionWidget;
-
 	UPROPERTY(VisibleAnywhere)
 		TObjectPtr<class UAudioComponent> BackGroundAudio;
+	UPROPERTY()
+		TObjectPtr<class UProjectGameInstance> ProjectGameInstance;
 public:
 	UFUNCTION()
 		void OnGameOver();
+	UFUNCTION()
+		void OnBackGroundSoundValueChange(float Value);
 };

@@ -9,8 +9,8 @@
 /**
  * 
  */
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnBackGroundValueDelegate, float);
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnEffectValueDelegate, float);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnBackSoundGroundValueChangeDelegate, float);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnEffectSoundValueChangeDelegate, float);
 UCLASS()
 class WIDGETS_API UOptionWidget : public UUserWidget
 {
@@ -26,13 +26,13 @@ public:
 	UPROPERTY(meta = (BindWidget))
 		TObjectPtr<class USlider> EffectSoundSlider;
 public:
-	FOnBackGroundValueDelegate OnBackGroundValue;
-	FOnEffectValueDelegate OnEffectValue;
+	FOnBackSoundGroundValueChangeDelegate OnBackGroundSoundValueChange;
+	FOnEffectSoundValueChangeDelegate OnEffectSoundValueChange;
 private:
 	UFUNCTION()
 		void OnCloseWidget();
 	UFUNCTION()
-		void OnBackgroundSoundValueChange(float Value);
+		void OnBackGroundSoundSlider(float Value);
 	UFUNCTION()
 		void OnEffectSoundSlider(float Value);
 };

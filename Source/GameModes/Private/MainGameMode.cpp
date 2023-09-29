@@ -8,6 +8,7 @@
 #include "Components/AudioComponent.h"
 #include "MainWidget.h"
 #include "OptionWidget.h"
+#include "ProjectGameInstance.h"
 
 //#include "Kismet/KismetSystemLibrary.h"
 
@@ -22,7 +23,7 @@ AMainGameMode::AMainGameMode()
 	DefaultPawnClass = AMainCharacter::StaticClass();
 
 	// * 옵션위젯
-	static ConstructorHelpers::FClassFinder<UUserWidget> OptionWidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_OptionWidget.BP_OptionWidget'"));
+	static ConstructorHelpers::FClassFinder<UUserWidget> OptionWidgetAsset(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Widget/BP_OptionWidget.BP_OptionWidget_C'"));
 	if (WidgetAsset.Succeeded())
 	{
 		OptionWidgetClass = OptionWidgetAsset.Class;
@@ -54,8 +55,23 @@ void AMainGameMode::BeginPlay()
 		OptionWidget->AddToViewport();
 		MainWidget->OptionWidget = OptionWidget;
 		OptionWidget->SetVisibility(ESlateVisibility::Hidden);
+		OptionWidget->OnBackGroundSoundValueChange.AddUObject(this, &AMainGameMode::OnBackGroundSoundValueChange);
 	}
+
+	ProjectGameInstance = Cast<UProjectGameInstance>((UGameplayStatics::GetGameInstance(GetWorld())));
 
 	// 게임 시작 시 전면광고 로드
 	//UKismetSystemLibrary::LoadInterstitialAd(0);
+}
+
+void AMainGameMode::OnBackGroundSoundValueChange(float Value)
+{
+	ProjectGameInstance->BackGroundSoundValue = Value;
+	BackGroundAudio->SetVolumeMultiplier(Value != 0 ? Value : 0.001f);
+	if (Value == 0)
+		BackGroundAudio->SetAutoActivate(false);
+	else
+		BackGroundAudio->SetAutoActivate(true);
+	FString Message = FString::Printf(TEXT("SoundValue : %f"), Value);
+	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, Message);
 }

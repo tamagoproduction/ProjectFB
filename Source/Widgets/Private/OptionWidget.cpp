@@ -9,22 +9,27 @@ void UOptionWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 	CloseButton->OnClicked.AddDynamic(this, &UOptionWidget::OnCloseWidget);
-	BackgroundSoundSlider->OnValueChanged.AddDynamic(this, &UOptionWidget::OnBackgroundSoundValueChange);
-
+	BackgroundSoundSlider->OnValueChanged.AddDynamic(this, &UOptionWidget::OnBackGroundSoundSlider);
+	EffectSoundSlider->OnValueChanged.AddDynamic(this, &UOptionWidget::OnEffectSoundSlider);
 }
 
 void UOptionWidget::OnCloseWidget()
 {
 	this->SetVisibility(ESlateVisibility::Hidden);
-
 }
 
-void UOptionWidget::OnBackgroundSoundValueChange(float Value)
+void UOptionWidget::OnBackGroundSoundSlider(float Value)
 {
-	OnBackGroundValue.Broadcast(Value);
+	if (OnBackGroundSoundValueChange.IsBound())
+	{
+		OnBackGroundSoundValueChange.Broadcast(Value);
+	}
 }
 
 void UOptionWidget::OnEffectSoundSlider(float Value)
 {
-	OnEffectValue.Broadcast(Value);
+	if (OnEffectSoundValueChange.IsBound())
+	{
+		OnEffectSoundValueChange.Broadcast(Value);
+	}
 }
