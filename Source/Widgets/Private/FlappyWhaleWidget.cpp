@@ -29,5 +29,6 @@ void UFlappyWhaleWidget::OnUpdateScore(int32 Score)
 
 void UFlappyWhaleWidget::OnOptionWidget()
 {
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
 	OptionWidget->SetVisibility(ESlateVisibility::Visible);
 }

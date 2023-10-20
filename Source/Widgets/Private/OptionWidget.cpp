@@ -4,6 +4,7 @@
 #include "OptionWidget.h"
 #include "Components/Button.h"
 #include "Components/Slider.h"
+#include "Kismet/GameplayStatics.h"
 
 void UOptionWidget::NativeOnInitialized()
 {
@@ -15,6 +16,7 @@ void UOptionWidget::NativeOnInitialized()
 
 void UOptionWidget::OnCloseWidget()
 {
+	UGameplayStatics::SetGamePaused(GetWorld(), false);
 	this->SetVisibility(ESlateVisibility::Hidden);
 }
 
