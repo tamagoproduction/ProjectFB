@@ -35,6 +35,8 @@ public:
 		TObjectPtr<class UAudioComponent> BackGroundAudio;
 	UPROPERTY()
 		TObjectPtr<class UProjectGameInstance> ProjectGameInstance;
+	UPROPERTY()
+		TObjectPtr<class UProjectSaveGame> SaveGameClass;
 public:
 	UFUNCTION()
 		void OnGameOver();

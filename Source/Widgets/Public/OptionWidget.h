@@ -17,6 +17,7 @@ class WIDGETS_API UOptionWidget : public UUserWidget
 	GENERATED_BODY()
 public:
 	virtual void NativeOnInitialized() override; //위젯 초기화시 호출되는 함수
+	virtual void NativeConstruct() override;
 public:
 	//TODO : 사운드 슬라이드바, 효과음 슬라이드바, 닫기(배경)
 	UPROPERTY(meta = (BindWidget))
@@ -25,6 +26,8 @@ public:
 		TObjectPtr<class USlider> BackgroundSoundSlider;
 	UPROPERTY(meta = (BindWidget))
 		TObjectPtr<class USlider> EffectSoundSlider;
+	UPROPERTY()
+		TObjectPtr<class UProjectSaveGame> SaveGameClass;
 public:
 	FOnBackSoundGroundValueChangeDelegate OnBackGroundSoundValueChange;
 	FOnEffectSoundValueChangeDelegate OnEffectSoundValueChange;
@@ -35,4 +38,8 @@ private:
 		void OnBackGroundSoundSlider(float Value);
 	UFUNCTION()
 		void OnEffectSoundSlider(float Value);
+		UFUNCTION()
+		void OnSaveMusicSound();
+		UFUNCTION()
+		void OnSaveSoundFX();
 };

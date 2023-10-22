@@ -10,6 +10,7 @@
 #include "FlappyWhaleWidget.h"
 #include "OptionWidget.h"
 #include "ProjectGameInstance.h"
+#include "ProjectSaveGame.h"
 
 AFlappyWhaleGameMode::AFlappyWhaleGameMode()
 {
@@ -78,6 +79,10 @@ void AFlappyWhaleGameMode::BeginPlay()
 	}
 
 	 ProjectGameInstance = Cast<UProjectGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+
+	 SaveGameClass = Cast<UProjectSaveGame>(UGameplayStatics::CreateSaveGameObject(UProjectSaveGame::StaticClass()));
+	 SaveGameClass = Cast<UProjectSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameClass->GetSaveSlotName(), SaveGameClass->GetSoundIndex()));
+	 BackGroundAudio->SetVolumeMultiplier(SaveGameClass->GetMusicVolume());
 }
 
 void AFlappyWhaleGameMode::OnGameOver()
@@ -93,7 +98,5 @@ void AFlappyWhaleGameMode::OnBackGroundSoundValueChange(float Value)
 		BackGroundAudio->SetAutoActivate(false);
 	else
 		BackGroundAudio->SetAutoActivate(true);
-	FString Message = FString::Printf(TEXT("SoundValue : %f"), Value);
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, Message);
 
 }

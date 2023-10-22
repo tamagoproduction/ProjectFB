@@ -24,7 +24,7 @@ APlayerCharacter::APlayerCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// 시작위치 변경
-	RootComponent->SetWorldLocation(FVector(50.f, -600.f, 300.f));
+	RootComponent->SetWorldLocation(FVector(50.f, -250.f, 300.f));
 
 	// 고래 메시 가져오기
 	ConstructorHelpers::FObjectFinder<USkeletalMesh> WhaleMesh(TEXT("/Script/Engine.SkeletalMesh'/Game/Whale/Mesh/Whale_High.Whale_High'"));
@@ -127,10 +127,6 @@ void APlayerCharacter::Tick(float DeltaTime)
 	{
 		SetActorRotation(FRotator(0, 0, FMath::Lerp(GetActorRotation().Roll, 90.f, -GetVelocity().Z * 0.005f * DeltaTime)));
 	}
-	FString message2 = FString::Printf(TEXT("%f, %f, %f"), GetVelocity().X, GetVelocity().Y, GetVelocity().Z);
-	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Red, message2);
-	FString message = FString::Printf(TEXT("%f, %f, %f"), GetActorRotation().Roll, GetActorRotation().Pitch, GetActorRotation().Yaw);
-	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Purple, message);
 }
 
 // Called to bind functionality to input
@@ -157,17 +153,9 @@ void APlayerCharacter::Jump()
 
 void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor != this)
-	{
-		FString message = FString::Printf(TEXT("Comp Name : %s"), *OtherComp->GetName());
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, message);
-	}
-
 	//충돌 상대가 유효하고 장애물 태그를 가지고 있다면
 	if (IsValid(OtherActor) && OtherComp->ComponentHasTag(Keys::GameKeys::Obstacle))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Blue, TEXT("Obstacle Collision Overlap"));
-
 		AFlappyWhaleGameMode* FlappyWhaleGameMode = Cast<AFlappyWhaleGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 		if (IsValid(FlappyWhaleGameMode))
 		{
@@ -175,8 +163,6 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 			{
 				GameInstance->SetBestScore(Score); //점수를 게임인스턴스에 저장
 			}
-			FString message2 = FString::Printf(TEXT("Score : %d"), GameInstance->GetBestScore());
-			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, message2);
 
 			// 게임 오버
 			//FlappyWhaleGameMode->OnGameOver();
@@ -193,11 +179,6 @@ void APlayerCharacter::OnMyOverlap(UPrimitiveComponent* OverlappedComp, AActor* 
 		{
 			OnUpdateScoreDelegate.Broadcast(Score);
 		}
-		FString message = FString::Printf(TEXT("Score : %d"), Score);
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, message);
-
-		FString message2 = FString::Printf(TEXT("Score : %d"), GameInstance->GetBestScore());
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, message2);
 		
 	}
 	// 아이템 충돌

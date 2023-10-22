@@ -9,6 +9,7 @@
 #include "MainWidget.h"
 #include "OptionWidget.h"
 #include "ProjectGameInstance.h"
+#include "ProjectSaveGame.h"
 
 //#include "Kismet/KismetSystemLibrary.h"
 
@@ -60,6 +61,11 @@ void AMainGameMode::BeginPlay()
 
 	ProjectGameInstance = Cast<UProjectGameInstance>((UGameplayStatics::GetGameInstance(GetWorld())));
 
+
+	SaveGameClass = Cast<UProjectSaveGame>(UGameplayStatics::CreateSaveGameObject(UProjectSaveGame::StaticClass()));
+	SaveGameClass = Cast<UProjectSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameClass->GetSaveSlotName(), SaveGameClass->GetSoundIndex()));
+	BackGroundAudio->SetVolumeMultiplier(SaveGameClass->GetMusicVolume());
+
 	// 게임 시작 시 전면광고 로드
 	//UKismetSystemLibrary::LoadInterstitialAd(0);
 }
@@ -72,6 +78,4 @@ void AMainGameMode::OnBackGroundSoundValueChange(float Value)
 		BackGroundAudio->SetAutoActivate(false);
 	else
 		BackGroundAudio->SetAutoActivate(true);
-	FString Message = FString::Printf(TEXT("SoundValue : %f"), Value);
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, Message);
 }
