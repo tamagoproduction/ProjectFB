@@ -10,33 +10,7 @@
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine",
-				"Widgets",
-				"Characters",
-				"GameModes"
-			]
-		},
-		{
-			"Name": "Widgets",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"UMG", "ProjectFB", "Characters", "GameModes"
-			]
-		},
-		{
-			"Name": "Characters",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine", "ProjectFB", "GameModes", "Widgets", "EnhancedInput"
-			]
-		},
-		{
-			"Name": "GameModes",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine", "ProjectFB", "Widgets", "Characters"
+				"UMG"
 			]
 		}
 	],

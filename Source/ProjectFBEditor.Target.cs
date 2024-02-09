@@ -10,6 +10,6 @@ public class ProjectFBEditorTarget : TargetRules
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V4;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_3;
-        ExtraModuleNames.AddRange(new string[] { "ProjectFB", "Widgets", "Characters", "GameModes" });
+        ExtraModuleNames.AddRange(new string[] { "ProjectFB" });
 	}
 }
