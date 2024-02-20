@@ -114,7 +114,7 @@ void AWhale::BeginPlay()
 		}
 	}
 	
-	GameInstance = Cast<UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	
 }
 
 // Called every frame
@@ -151,8 +151,8 @@ void AWhale::Jump()
 {
 	Super::Jump();
 	PlayAnimMontage(JumpMontage);
-
-	UGameplayStatics::PlaySound2D(GetWorld(), JumpSound, GameInstance->EffectSoundValue);
+	UWhaleGameInstance* Instance = Cast<UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	UGameplayStatics::PlaySound2D(GetWorld(), JumpSound, Instance->SoundVolume);
 }
 
 void AWhale::OnWhaleOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -163,13 +163,14 @@ void AWhale::OnWhaleOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		AWhaleGameMode* WhaleGameMode = Cast<AWhaleGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 		if (IsValid(WhaleGameMode))
 		{
-			if (GameInstance->GetBestScore() < Score)
+			UWhaleGameInstance* Instance = Cast<UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+			if (Instance->Score < Score)
 			{
-				GameInstance->SetBestScore(Score); //점수를 게임인스턴스에 저장
+				Instance->Score = Score; //점수를 게임인스턴스에 저장
 			}
 
 			// 게임 오버
-			//FlappyWhaleGameMode->OnGameOver();
+			WhaleGameMode->OnGameOver();
 			OnGameOver.Broadcast();
 			UGameplayStatics::SetGamePaused(GetWorld(), true);
 			//TODO : 죽은경우 서버로 점수 저장

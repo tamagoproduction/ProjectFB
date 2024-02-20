@@ -42,6 +42,7 @@ AMainGameMode::AMainGameMode()
 void AMainGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	ACharacter* Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	if (IsValid(Player))
 	{
@@ -68,24 +69,55 @@ void AMainGameMode::BeginPlay()
 		OptionWidget->AddToViewport();
 		MainWidget->OptionWidget = OptionWidget;
 		OptionWidget->SetVisibility(ESlateVisibility::Hidden);
-		OptionWidget->OnBackGroundSoundValueChange.AddUObject(this, &AMainGameMode::OnBackGroundSoundValueChange);
+		OptionWidget->OnMusicValueChange.AddUObject(this, &AMainGameMode::OnMusicValueChange);
+		OptionWidget->OnSoundValueChange.AddUObject(this, &AMainGameMode::OnSoundValueChange);
 	}
-
-	WhaleGameInstance = Cast<UWhaleGameInstance>((UGameplayStatics::GetGameInstance(GetWorld())));
-
-	SaveGameClass = WhaleGameInstance->Load();
-	if (IsValid(SaveGameClass))
-	{
-		BackGroundAudio->SetVolumeMultiplier(SaveGameClass->GetMusicVolume());
-	}
+	FTimerHandle Timer;
+	GetWorldTimerManager().SetTimer(Timer, this, &AMainGameMode::Load, 0.2f, false);
 }
 
-void AMainGameMode::OnBackGroundSoundValueChange(float Value)
+void AMainGameMode::OnMusicValueChange(float Value)
 {
-	WhaleGameInstance->BackGroundSoundValue = Value;
+	auto Instance = Cast< UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	Instance->MusicVolume = Value;
 	BackGroundAudio->SetVolumeMultiplier(Value != 0 ? Value : 0.001f);
 	if (Value == 0)
 		BackGroundAudio->SetAutoActivate(false);
 	else
 		BackGroundAudio->SetAutoActivate(true);
+	Save();
+}
+
+void AMainGameMode::OnSoundValueChange(float Value)
+{
+	auto Instance = Cast< UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	Instance->SoundVolume = Value;
+	Save();
+}
+
+void AMainGameMode::Save()
+{
+	UWhaleSaveGame* SaveGame = Cast<UWhaleSaveGame>(UGameplayStatics::CreateSaveGameObject(UWhaleSaveGame::StaticClass()));
+	if (SaveGame == nullptr) return;
+	auto Instance = Cast< UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	if (Instance == nullptr) return;
+	SaveGame->Score = Instance->Score;
+	SaveGame->MusicVolume = Instance->MusicVolume;
+	SaveGame->SoundVolume = Instance->SoundVolume;
+	UGameplayStatics::AsyncSaveGameToSlot(SaveGame, SaveGame->SaveSlotName, SaveGame->Index);
+}
+
+void AMainGameMode::Load()
+{
+	UWhaleSaveGame* MySaveGame = Cast<UWhaleSaveGame>(UGameplayStatics::CreateSaveGameObject(UWhaleSaveGame::StaticClass()));
+	if (MySaveGame == nullptr) return;
+	if (UGameplayStatics::DoesSaveGameExist(MySaveGame->SaveSlotName, MySaveGame->Index))
+	{
+		auto Instance = Cast< UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+		if (Instance == nullptr) return;
+		MySaveGame = Cast<UWhaleSaveGame>(UGameplayStatics::LoadGameFromSlot(MySaveGame->SaveSlotName, MySaveGame->Index));
+		Instance->Score = MySaveGame->Score;
+		Instance->MusicVolume = MySaveGame->MusicVolume;
+		Instance->SoundVolume = MySaveGame->SoundVolume;
+	}
 }

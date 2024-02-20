@@ -15,29 +15,11 @@ class PROJECTFB_API UWhaleGameInstance : public UGameInstance
 	GENERATED_BODY()
 public:
 	UWhaleGameInstance();
-
-	virtual void Init() override;
-private:
+public:
 	UPROPERTY(VisibleAnywhere, Category = "Score")
-	int32 BestScore;
-public:
+	int32 Score;
 	UPROPERTY(VisibleAnywhere, Category = "Sound")
-	float BackGroundSoundValue;
+	float MusicVolume; //배경음
 	UPROPERTY(VisibleAnywhere, Category = "Sound")
-	float EffectSoundValue;
-private:
-	UPROPERTY()
-	TObjectPtr<class UWhaleSaveGame> SaveGameClass;
-public:
-	void SetBestScore(int32 value);
-
-	FORCEINLINE int32 GetBestScore()
-	{
-		return BestScore;
-	}
-	
-	void MusicSave(float InMusicValue);
-	void SoundFxSave(float InSoundFx);
-	void ScoreSave(int InScore);
-	TObjectPtr<class UWhaleSaveGame> Load();
+	float SoundVolume; //효과음
 };

@@ -3,3 +3,6 @@
 
 #include "Game/WhaleSaveGame.h"
 
+UWhaleSaveGame::UWhaleSaveGame() : SaveSlotName(TEXT("MyFlappyWhale")), Index(0)
+{
+}

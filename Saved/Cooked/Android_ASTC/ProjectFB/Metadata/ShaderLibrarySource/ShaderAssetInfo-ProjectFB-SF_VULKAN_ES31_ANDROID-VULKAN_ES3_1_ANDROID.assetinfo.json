@@ -154,12 +154,6 @@
 			]
 		},
 		{
-			"ShaderMapHash": "11CCA06F0CFC563180FB799E6EFBC79879AC1B11",
-			"Assets": [
-				"/Game/A_Surface_Footstep/Niagara_FX/Materials/M_DirectionalDust"
-			]
-		},
-		{
 			"ShaderMapHash": "BD24FC76E2235CDFB74BA0CCF4942EE337B83DAF",
 			"Assets": [
 				"/ControlRig/M_Manip"
@@ -217,12 +211,6 @@
 			"ShaderMapHash": "68E9A59C002FAB4941D8E10D60AA16A689D551A5",
 			"Assets": [
 				"/Engine/EngineMaterials/NaniteHiddenSectionMaterial"
-			]
-		},
-		{
-			"ShaderMapHash": "728DEE9C30B78383B586E3045213AD99A888E6D9",
-			"Assets": [
-				"/Paper2D/TranslucentUnlitSpriteMaterial"
 			]
 		},
 		{
@@ -336,12 +324,6 @@
 			]
 		},
 		{
-			"ShaderMapHash": "1BA1B8EB77E28C02EBC69C7BB42E4EBAA37868D4",
-			"Assets": [
-				"/Game/A_Surface_Footstep/Niagara_FX/Materials/M_Refraction"
-			]
-		},
-		{
 			"ShaderMapHash": "F4BA2CF5E66E533572E74DE697BE48AF37DE43C5",
 			"Assets": [
 				"/Engine/EngineMaterials/M_InvalidLightmapSettings"
@@ -357,12 +339,6 @@
 			"ShaderMapHash": "6E236FF9DF70E36E6CCE9406C0B2D286B6631D6D",
 			"Assets": [
 				"/SpeedTreeImporter/SpeedTree9/SpeedTreeBillboardMaster"
-			]
-		},
-		{
-			"ShaderMapHash": "AE99DAFD8BC80A28A7AAB337BE69AE5CC181C03E",
-			"Assets": [
-				"/Game/A_Surface_Footstep/Niagara_FX/Materials/M_Splash_Refract"
 			]
 		}
 	]

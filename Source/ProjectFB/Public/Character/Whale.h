@@ -37,9 +37,6 @@ private:
 	// * 카메라
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	TObjectPtr<class AWhaleCameraActor> WhaleCamera;
-	// * 게임인스턴스
-	UPROPERTY(VisibleAnywhere, Category = "Camera")
-	TObjectPtr<class UWhaleGameInstance> GameInstance;
 
 	UPROPERTY(VisibleAnywhere, Category = "Score")
 	int32 Score;

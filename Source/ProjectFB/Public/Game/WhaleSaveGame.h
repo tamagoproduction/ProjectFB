@@ -13,56 +13,18 @@ UCLASS()
 class PROJECTFB_API UWhaleSaveGame : public USaveGame
 {
 	GENERATED_BODY()
-private:
+public:
+	UWhaleSaveGame();
+public:
 	UPROPERTY()
-	FString SaveSlotName = TEXT("MyFlappyWhale");
+	FString SaveSlotName;
 	UPROPERTY()
-	int32 SoundIndex = 0;
+	int32 Index;
 	UPROPERTY()
 	float MusicVolume;
 	UPROPERTY()
-	float SoundFXVolume;
+	float SoundVolume;
 	UPROPERTY()
 	int32 Score;
-public:
-	UFUNCTION()
-	FORCEINLINE FString GetSaveSlotName()
-	{
-		return SaveSlotName;
-	}
-	UFUNCTION()
-	FORCEINLINE int32 GetSoundIndex()
-	{
-		return SoundIndex;
-	}
-	UFUNCTION()
-	FORCEINLINE float GetMusicVolume()
-	{
-		return MusicVolume;
-	}
-	UFUNCTION()
-	FORCEINLINE float GetSoundFXVolume()
-	{
-		return SoundFXVolume;
-	}
-	UFUNCTION()
-	FORCEINLINE void SetMusicVolume(float Value)
-	{
-		MusicVolume = Value;
-	}
-	UFUNCTION()
-	FORCEINLINE void SetSoundFXVolume(float Value)
-	{
-		SoundFXVolume = Value;
-	}
-	UFUNCTION()
-	FORCEINLINE void SetScore(int Value)
-	{
-		Score = Value;
-	}
-	UFUNCTION()
-	FORCEINLINE int GetScore()
-	{
-		return Score;
-	}
+
 };

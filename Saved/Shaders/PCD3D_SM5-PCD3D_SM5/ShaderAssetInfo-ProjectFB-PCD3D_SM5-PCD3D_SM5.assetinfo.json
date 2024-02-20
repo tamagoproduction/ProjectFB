@@ -455,12 +455,6 @@
 			]
 		},
 		{
-			"ShaderMapHash": "3C0D89DAB743DFAF58319935D66F8C7E86EA84D1",
-			"Assets": [
-				"/Paper2D/TranslucentUnlitSpriteMaterial"
-			]
-		},
-		{
 			"ShaderMapHash": "C11799DBC510DDA5EDAF8DA24DC7A63CF0959A6A",
 			"Assets": [
 				"/Interchange/gltf/MaterialInstances/MI_ClearCoat_Mask"

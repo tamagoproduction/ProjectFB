@@ -76,12 +76,6 @@
 			]
 		},
 		{
-			"ShaderMapHash": "71C6873E3185D3C786BABACD3AF1E8C1A84EF56A",
-			"Assets": [
-				"/Game/A_Surface_Footstep/Niagara_FX/Materials/M_DirectionalDust"
-			]
-		},
-		{
 			"ShaderMapHash": "A5B9CF3EA5FD9DC2AEC7C7548419AFF89D0670D9",
 			"Assets": [
 				"/Game/Pillar/Material/MAT_Class_Column_Pillar",
@@ -152,12 +146,6 @@
 			"ShaderMapHash": "4B004963A4A51F3B2DB094E26167BEFF5A150798",
 			"Assets": [
 				"/Engine/EngineMaterials/RemoveSurfaceMaterial"
-			]
-		},
-		{
-			"ShaderMapHash": "5A66F767CEE5F67AB40B317B9D6C49078118E75D",
-			"Assets": [
-				"/Game/A_Surface_Footstep/Niagara_FX/Materials/M_Splash_Refract"
 			]
 		},
 		{
@@ -264,12 +252,6 @@
 			]
 		},
 		{
-			"ShaderMapHash": "F0AA98B0D9E151479914F02D0FD496F96FEBB7EF",
-			"Assets": [
-				"/Game/A_Surface_Footstep/Niagara_FX/Materials/M_Refraction"
-			]
-		},
-		{
 			"ShaderMapHash": "AAB2BBB1DF5FEA01FDF098656118D858556054A6",
 			"Assets": [
 				"/SpeedTreeImporter/SpeedTree9/SpeedTreeMaster"
@@ -309,12 +291,6 @@
 			"ShaderMapHash": "914427D3FA2987F602B1314F6454D3E286AA54DA",
 			"Assets": [
 				"/Game/GoodSky/Resource/Materials/M_GoodSky_Sun_Stars_Moon"
-			]
-		},
-		{
-			"ShaderMapHash": "DD2EFCD6EA64D7C9856BF7B743C95B56F06B09E9",
-			"Assets": [
-				"/Paper2D/TranslucentUnlitSpriteMaterial"
 			]
 		},
 		{

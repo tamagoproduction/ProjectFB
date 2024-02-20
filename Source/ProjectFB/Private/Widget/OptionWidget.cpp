@@ -12,24 +12,22 @@ void UOptionWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 	CloseButton->OnClicked.AddDynamic(this, &UOptionWidget::OnCloseWidget);
-	BackgroundSoundSlider->OnValueChanged.AddDynamic(this, &UOptionWidget::OnBackGroundSoundSlider);
+	BackgroundSoundSlider->OnValueChanged.AddDynamic(this, &UOptionWidget::OnMusicSlider);
 	BackgroundSoundSlider->OnMouseCaptureEnd.AddDynamic(this, &UOptionWidget::OnSaveMusicSound);
-	EffectSoundSlider->OnValueChanged.AddDynamic(this, &UOptionWidget::OnEffectSoundSlider);
+	EffectSoundSlider->OnValueChanged.AddDynamic(this, &UOptionWidget::OnSoundSlider);
 	EffectSoundSlider->OnMouseCaptureEnd.AddDynamic(this, &UOptionWidget::OnSaveSoundFX);
 }
 
 void UOptionWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
-	WhaleGameInstance = Cast<UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	SaveGameClass = WhaleGameInstance->Load();
-	if (SaveGameClass != nullptr)
-	{
-		/*FString Message = FString::Printf(TEXT("Music : %f / SoundFx : %f"), SaveGameClass->GetMusicVolume(), SaveGameClass->GetSoundFXVolume());
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, Message);*/
-		BackgroundSoundSlider->SetValue(SaveGameClass->GetMusicVolume());
-		EffectSoundSlider->SetValue(SaveGameClass->GetSoundFXVolume());
-	}
+	//WhaleGameInstance = Cast<UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	//SaveGameClass = WhaleGameInstance->Load();
+	//if (SaveGameClass != nullptr)
+	//{
+	//	BackgroundSoundSlider->SetValue(SaveGameClass->GetMusicVolume());
+	//	EffectSoundSlider->SetValue(SaveGameClass->GetSoundFXVolume());
+	//}
 }
 
 void UOptionWidget::OnCloseWidget()
@@ -38,28 +36,37 @@ void UOptionWidget::OnCloseWidget()
 	this->SetVisibility(ESlateVisibility::Hidden);
 }
 
-void UOptionWidget::OnBackGroundSoundSlider(float Value)
+void UOptionWidget::OnMusicSlider(float Value)
 {
-	if (OnBackGroundSoundValueChange.IsBound())
+	if (OnMusicValueChange.IsBound())
 	{
-		OnBackGroundSoundValueChange.Broadcast(Value);
+		OnMusicValueChange.Broadcast(Value);
 	}
 }
 
-void UOptionWidget::OnEffectSoundSlider(float Value)
+void UOptionWidget::OnSoundSlider(float Value)
 {
-	if (OnEffectSoundValueChange.IsBound())
+	if (OnSoundValueChange.IsBound())
 	{
-		OnEffectSoundValueChange.Broadcast(Value);
+		OnSoundValueChange.Broadcast(Value);
 	}
 }
 
 void UOptionWidget::OnSaveMusicSound()
 {
-	WhaleGameInstance->MusicSave(BackgroundSoundSlider->GetValue());
+	UWhaleGameInstance* Instance = Cast<UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	if (Instance != nullptr)
+	{
+		Instance->MusicVolume = BackgroundSoundSlider->GetValue();
+	}
+	
 }
 
 void UOptionWidget::OnSaveSoundFX()
 {
-	WhaleGameInstance->SoundFxSave(EffectSoundSlider->GetValue());
+	UWhaleGameInstance* Instance = Cast<UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	if (Instance != nullptr)
+	{
+		Instance->SoundVolume = EffectSoundSlider->GetValue();
+	}
 }

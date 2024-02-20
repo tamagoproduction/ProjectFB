@@ -6,8 +6,8 @@
 #include "Blueprint/UserWidget.h"
 #include "OptionWidget.generated.h"
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnBackSoundGroundValueChangeSignature, float);
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnEffectSoundValueChangeSignature, float);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnMusicValueChangeSignature, float);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnSoundValueChangeSignature, float);
 
 /**
  * 
@@ -32,15 +32,15 @@ public:
 	UPROPERTY()
 	TObjectPtr<class UWhaleGameInstance> WhaleGameInstance;
 public:
-	FOnBackSoundGroundValueChangeSignature OnBackGroundSoundValueChange;
-	FOnEffectSoundValueChangeSignature OnEffectSoundValueChange;
+	FOnMusicValueChangeSignature OnMusicValueChange;
+	FOnSoundValueChangeSignature OnSoundValueChange;
 private:
 	UFUNCTION()
 	void OnCloseWidget();
 	UFUNCTION()
-	void OnBackGroundSoundSlider(float Value);
+	void OnMusicSlider(float Value);
 	UFUNCTION()
-	void OnEffectSoundSlider(float Value);
+	void OnSoundSlider(float Value);
 	UFUNCTION()
 	void OnSaveMusicSound();
 	UFUNCTION()

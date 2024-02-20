@@ -40,6 +40,14 @@ public:
 public:
 	UFUNCTION()
 	void OnGameOver();
+private:
 	UFUNCTION()
-	void OnBackGroundSoundValueChange(float Value);
+	void OnMusicValueChange(float Value);
+	UFUNCTION()
+	void OnSoundValueChange(float Value);
+public:
+	UFUNCTION()
+	void Save();
+	UFUNCTION()
+	void Load();
 };

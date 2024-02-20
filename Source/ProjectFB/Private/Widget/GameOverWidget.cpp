@@ -38,12 +38,12 @@ void UGameOverWidget::OnRestart()
 		UKismetSystemLibrary::ShowInterstitialAd();
 	}*/
 
-	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::FlappyWhaleMap);
+	UGameplayStatics::OpenLevel(GetWorld(), TEXT("FlappyWhaleMap"));
 }
 
 void UGameOverWidget::OnMain()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::MainMap);
+	UGameplayStatics::OpenLevel(GetWorld(), TEXT("MainMap"));
 }
 
 void UGameOverWidget::OnUpdateScore(int32 Score)
@@ -57,7 +57,7 @@ void UGameOverWidget::OnUpdateBestScore()
 	UWhaleGameInstance* Instance = Cast<UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	if (Instance != nullptr)
 	{
-		FString BestScoreStr = FString::Printf(TEXT("%d"), Instance->GetBestScore());
+		FString BestScoreStr = FString::Printf(TEXT("%d"), Instance->Score);
 		BestScoreText->SetText(FText::FromString(BestScoreStr));
 	}
 }

@@ -5,6 +5,10 @@
 #include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
 #include "Utile/Keys.h"
+#include "Game/WhaleGameInstance.h"
+#include "Widget/OptionWidget.h"
+#include "Components/Slider.h"
+
 
 void UMainWidget::NativeOnInitialized()
 {
@@ -16,7 +20,7 @@ void UMainWidget::NativeOnInitialized()
 
 void UMainWidget::OnStartGame()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), Keys::LevelKeys::FlappyWhaleMap);
+	UGameplayStatics::OpenLevel(GetWorld(), TEXT("FlappyWhaleMap"));
 }
 
 void UMainWidget::OnOptionWidget()
@@ -25,4 +29,8 @@ void UMainWidget::OnOptionWidget()
 	{
 		OptionWidget->SetVisibility(ESlateVisibility::Visible);
 	}
+	UWhaleGameInstance* Instance = Cast<UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	UOptionWidget* Option = Cast<UOptionWidget>(OptionWidget);
+	Option->BackgroundSoundSlider->SetValue(Instance->MusicVolume);
+	Option->EffectSoundSlider->SetValue(Instance->SoundVolume);
 }

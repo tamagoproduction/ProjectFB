@@ -6,6 +6,9 @@
 #include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
 #include "Character/Whale.h"
+#include "Game/WhaleGameInstance.h"
+#include "Widget/OptionWidget.h"
+#include "Components/Slider.h"
 
 void UWhaleWidget::NativeOnInitialized()
 {
@@ -30,4 +33,8 @@ void UWhaleWidget::OnOptionWidget()
 {
 	UGameplayStatics::SetGamePaused(GetWorld(), true);
 	OptionWidget->SetVisibility(ESlateVisibility::Visible);
+	UWhaleGameInstance* Instance = Cast<UWhaleGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	UOptionWidget* Option = Cast<UOptionWidget>(OptionWidget);
+	Option->BackgroundSoundSlider->SetValue(Instance->MusicVolume);
+	Option->EffectSoundSlider->SetValue(Instance->SoundVolume);
 }

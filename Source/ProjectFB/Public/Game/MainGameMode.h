@@ -28,11 +28,14 @@ public:
 	TObjectPtr<class UOptionWidget> OptionWidget;
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<class UAudioComponent> BackGroundAudio;
-	UPROPERTY()
-	TObjectPtr<class UWhaleGameInstance> WhaleGameInstance;
-	UPROPERTY()
-	TObjectPtr<class UWhaleSaveGame> SaveGameClass;
+private:
+	UFUNCTION()
+	void OnMusicValueChange(float Value);
+	UFUNCTION()
+	void OnSoundValueChange(float Value);
 public:
 	UFUNCTION()
-	void OnBackGroundSoundValueChange(float Value);
+	void Save();
+	UFUNCTION()
+	void Load();
 };
